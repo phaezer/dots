@@ -1,4 +1,5 @@
 return {
+  name = 'bashls',
   cmd = { 'bash-language-server', 'start' },
   settings = {
     bashIde = {

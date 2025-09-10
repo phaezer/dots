@@ -6,8 +6,17 @@
   "Lua.runtime.special": {
     "vim": "require"
   },
-  "Lua.diagnostics.globals": ["vim", "Snacks", "MiniDeps"],
-    "diagnostics.disable": [
-        "undefined-field"
-    ]
+  "Lua.diagnostics.globals": [
+    "vim", 
+    "Snacks", 
+    "MiniDeps",
+    "describe",
+    "it",
+    "MiniTest",
+    "before_each",
+    "after_each"
+  ],
+  "diagnostics.disable": [
+     "undefined-field"
+  ]
 }

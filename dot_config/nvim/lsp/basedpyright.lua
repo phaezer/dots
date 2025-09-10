@@ -1,4 +1,5 @@
 return {
+  name = 'basedpyright',
   settings = {
     basedpyright = {
       disableOrganizeImports = true,
