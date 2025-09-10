@@ -54,6 +54,8 @@ echo -e "${GREEN}Creating symbolic links...${NC}"
 # Bash configurations
 create_symlink "$DOTFILES_DIR/bash/.bashrc" "$HOME/.bashrc"
 create_symlink "$DOTFILES_DIR/bash/.bash_profile" "$HOME/.bash_profile"
+create_symlink "$DOTFILES_DIR/bash/.bash_aliases" "$HOME/.bash_aliases"
+create_symlink "$DOTFILES_DIR/bash/.bash_functions" "$HOME/.bash_functions"
 
 # Git configurations
 create_symlink "$DOTFILES_DIR/git/.gitconfig" "$HOME/.gitconfig"

@@ -24,12 +24,21 @@ cd ~/dotfiles
 ## Structure
 
 ```
-├── bash/          # Bash configuration files
-├── git/           # Git configuration
-├── vim/           # Vim configuration
-├── tmux/          # Tmux configuration
-├── install.sh     # Installation script
-└── README.md      # This file
+├── bash/              # Bash configuration files
+│   ├── .bashrc        # Main bash configuration
+│   ├── .bash_profile  # Login shell configuration
+│   ├── .bash_aliases  # Custom aliases
+│   └── .bash_functions # Custom functions
+├── git/               # Git configuration
+│   ├── .gitconfig     # Git global configuration
+│   └── .gitignore_global # Global gitignore patterns
+├── vim/               # Vim configuration
+│   └── .vimrc         # Vim configuration
+├── tmux/              # Tmux configuration
+│   └── .tmux.conf     # Tmux configuration
+├── install.sh         # Installation script
+├── .gitignore         # Repository gitignore
+└── README.md          # This file
 ```
 
 ## Usage
