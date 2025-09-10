@@ -1,0 +1,171 @@
+(defalias
+  ;; basic
+  0 0
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+
+  A S-a
+  B S-b
+  C S-c
+  D S-d
+  E S-e
+  F S-f
+  G S-g
+  H S-h
+  I S-i
+  J S-j
+  K S-k
+  L S-l
+  M S-m
+  N S-n
+  O S-o
+  P S-p
+  Q S-q
+  R S-r
+  S S-s
+  T S-t
+  U S-u
+  V S-v
+  W S-w
+  X S-x
+  Y S-y
+  Z S-z
+
+  ! S-1
+  @ S-2
+  # S-3
+  $ S-4
+  % S-5
+  ^ S-6
+  & S-7
+  * S-8
+  | S-\
+  ~ S-`
+  + S-=
+  _ S--
+  { S-[
+  } S-]
+  : S-;
+  < S-,
+  > S-.
+  ? S-/
+
+  ;; --- macros ---
+  ;; code symbol macros
+  --- (macro - - -)
+  ``` (macro ` ` `)
+  ... (macro . . .)
+  === (macro = = =)
+  [[ (macro [ [)
+  drp (macro S-9 S-9)
+  dlp (macro S-0 S-0)
+  ]] (macro ] ])
+  {{ (macro @{ @{)
+  }} (macro @{ @})
+  >= (macro @> =)
+  == (macro = =)
+  != (macro = =)
+  <= (macro @< =)
+  && (macro @& @&)
+  || (macro @| @|)
+  :: (macro @: @:)
+  &= (macro @& =)
+  ^= (macro @^ =)
+  ~= (macro @~ =)
+  -= (macro - =)
+  += (macro @+ =)
+
+  ;; arrows
+  -> (macro - S-.)
+  --> (macro - - S-.)
+  <- (macro S-, -)
+  <-- (macro S-, - -)
+  => (macro = S-.)
+  ==> (macro = = S-.)
+  <=> (macro S-, = S-.)
+  <== (macro S-< = =)
+
+
+)
+
+(platform (win linux)
+  (defalias
+    ;; unicode
+    “ (unicode “)
+    ” (unicode ”)
+    ‘ (unicode ‘)
+    ’ (unicode ’)
+
+    « (unicode «)
+    » (unicode »)
+    ‹ (unicode ‹)
+    › (unicode ›)
+
+    「 (unicode 「)
+    」 (unicode 」)
+    『 (unicode 『)
+    』 (unicode 』)
+
+    〈 (unicode 〈)
+    〉 (unicode 〉)
+    《 (unicode 《)
+    》 (unicode 》)
+
+    ′ (unicode ′)
+    ″ (unicode ″)
+    ‴ (unicode ‴)
+
+    ® (unicode ®)
+    ™ (unicode ™)
+    § (unicode §)
+    © (unicode ©)
+    ° (unicode °)
+    Æ (unicode Æ)
+    µ (unicode µ)
+    𝑓 (unicode 𝑓)
+  )
+)
+(platform (macos)
+ (defalias
+  “ (macro A-u A-2 A-0 A-1 A-c)
+  ” (macro A-u A-2 A-0 A-1 A-d)
+  ‘ (macro A-u A-2 A-0 A-1 A-8)
+  ’ (macro A-u A-2 A-0 A-1 A-9)
+
+  « (macro A-u A-0 A-0 A-a A-b)
+  » (macro A-u A-0 A-0 A-b A-b)
+  ‹ (macro A-u A-2 A-0 A-3 A-9)
+  › (macro A-u A-2 A-0 A-3 A-a)
+
+ 「 (macro A-u A-3 A-0 A-0 A-c)
+  」 (macro A-u A-3 A-0 A-0 A-d)
+  『 (macro A-u A-3 A-0 A-0 A-e)
+  』 (macro A-u A-3 A-0 A-0 A-f)
+
+  〈 (macro A-u A-3 A-0 A-0 A-8)
+  〉 (macro A-u A-3 A-0 A-0 A-9)
+  《 (macro A-u A-3 A-0 A-0 A-a)
+  》 (macro A-u A-3 A-0 A-0 A-b)
+
+  ′ (macro A-u A-2 A-0 A-3 A-2)
+  ″ (macro A-u A-2 A-0 A-3 A-3)
+  ‴ (macro A-u A-2 A-0 A-3 A-3)
+
+  ® (macro A-u A-0 A-0 A-a A-e)
+  ™ (macro A-u A-2 A-1 A-2 A-2)
+  § (macro A-u A-0 A-0 A-a A-7)
+  © (macro A-u A-0 A-0 A-a A-9)
+  ° (macro A-u A-0 A-0 A-b A-0)
+  Æ (macro A-u A-0 A-0 A-c A-6)
+  µ (macro A-u A-0 A-0 A-b A-5)
+  𝑓 (macro A-u A-1 A-d A-4 A-5 A-3)
+ )
+)
+

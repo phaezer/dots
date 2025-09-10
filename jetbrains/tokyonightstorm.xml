@@ -1,0 +1,27 @@
+<mtTheme>
+  <shouldSyncColors>false</shouldSyncColors>
+  <fileId>custom</fileId>
+  <themeId>tokyonightstorm</themeId>
+  <name>tokyonightstorm</name>
+  <editorColorsScheme>TokyoNightStormEric</editorColorsScheme>
+  <dark>true</dark>
+  <colors>
+    <color id="background" value="24283bff"/>
+    <color id="foreground" value="a9b1d6ff"/>
+    <color id="text" value="9aa5ceff"/>
+    <color id="highlight" value="354d8dff"/>
+    <color id="selectionBackground" value="343b58ff"/>
+    <color id="selectionForeground" value="c0caf5ff"/>
+    <color id="button" value="292e42ff"/>
+    <color id="secondaryBackground" value="24283bff"/>
+    <color id="disabled" value="414868ff"/>
+    <color id="contrast" value="212436ff"/>
+    <color id="tableSelected" value="212436ff"/>
+    <color id="secondBorder" value="0a0c14ff"/>
+    <color id="treeSelection" value="2f3c75ff"/>
+    <color id="notifications" value="292e42ff"/>
+    <color id="accent" value="7aa2f7ff"/>
+    <color id="secondAccent" value="2ac1dcff"/>
+    <color id="excluded" value="414868ff"/>
+  </colors>
+</mtTheme>

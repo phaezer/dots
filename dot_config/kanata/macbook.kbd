@@ -1,0 +1,207 @@
+(include "lib/symbols.kbd")
+(include "lib/words.kbd")
+(include "secrets.kbd")
+
+(defcfg
+  ;; required for chordsv2
+  concurrent-tap-hold yes
+  sequence-timeout 1000
+)
+
+
+(defsrc
+  `    1    2    3    4    5    6    7    8    9    0    -    =   bks
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]     \
+  caps a    s    d    f    g    h    j    k    l    ;    '        ret
+  lsft z    x    c    v    b    n    m    ,    .    /            rsft
+      lctl lalt lmet            spc           rmet ralt rctl
+)
+
+(defvar
+  ;; --- timings ---
+  ;; taps
+  to-tap-s 40
+  to-tap-m 75
+  to-tap-l 200
+
+  ;; holds
+  to-hld-s 200
+  to-hld-m 300
+  to-hld-l 500
+
+  ;; chords
+  to-crd-s 30
+  to-crd-m 50
+  to-crd-l 150
+
+  ;; autoshift
+  to-as 200
+
+  ;; l/r hand keys
+  right-hand-except (
+    q w e r
+    ;; a s d f
+    z x c v
+    spc
+  )
+  left-hand-except (
+    u i o p
+    ;; j k l ;
+    m , . /
+    spc
+  )
+)
+
+(deftemplate auto-shift (key)
+  (tap-hold-press-timeout 100 100 $key $key (concat "S-" $key))
+)
+
+(deftemplate mod-tap (char mod)
+  (switch
+    ((key-timing 3 less-than 250)) $char break
+    () (tap-hold-release-timeout 200 400 $char $mod $char) break
+  )
+)
+
+;; common aliases
+(defalias
+  ;; --- multi ---
+  meh (multi lctl lalt lsft)
+  hyp (multi lctl lalt lsft lmet)
+
+  ;; layers
+  SYM (layer-toggle sym)
+  SYM2 (layer-toggle sym2)
+  TYP (layer-toggle typ)
+  NUM (layer-toggle num)
+  MAC (layer-toggle macros)
+  FN (layer-toggle fn)
+
+  cpw (caps-word-toggle 1000)
+
+  ;; layer tap holds
+  spc (tap-hold $to-tap-l $to-hld-m spc @SYM)
+  tab (tap-hold $to-tap-l $to-hld-m tab @hyp)
+  \ (tap-hold 0 $to-hld-m \ @hyp)
+  z (tap-hold 0 $to-hld-m z @FN)
+  / (tap-hold 0 $to-hld-m / @FN)
+
+  ;; dynamic macros
+  rdm1 (dynamic-macro-record 1)
+  pdm1 (dynamic-macro-play 1)
+  rdm2 (dynamic-macro-record 2)
+  pdm2 (dynamic-macro-play 2)
+  rdm3 (dynamic-macro-record 3)
+  pdm3 (dynamic-macro-play 3)
+  rdm4 (dynamic-macro-record 4)
+  pdm4 (dynamic-macro-play 4)
+  rdm5 (dynamic-macro-record 5)
+  pdm5 (dynamic-macro-play 5)
+
+  ;; mod-tap keys
+
+  ;; hrm
+  a (t! mod-tap a lctl)
+  s (t! mod-tap s lalt)
+  d (t! mod-tap d lmet)
+  f (t! mod-tap f lsft)
+  j (t! mod-tap j rsft)
+  k (t! mod-tap k rmet)
+  l (t! mod-tap l ralt)
+  ; (t! mod-tap ; rctl)
+  ;; hyp / meh
+  x (t! mod-tap x @meh)
+  c (t! mod-tap c @hyp)
+  . (t! mod-tap . @hyp)
+  , (t! mod-tap , @meh)
+)
+
+(defchordsv2
+  ;; LEFT HAND
+  (s d) bks $to-crd-s all-released ()
+  (d f) del $to-crd-s all-released ()
+  (a f) @~  $to-crd-s all-released ()
+
+  (f e) @$ $to-crd-s all-released ()
+  (f w) @^ $to-crd-s all-released ()
+  (f q) ` $to-crd-s all-released ()
+  (d w) @@ $to-crd-m all-released ()
+  (q w) @! $to-crd-s all-released ()
+  (d q) @# $to-crd-m all-released ()
+
+  ;; RIGHT HAND
+  (j k) esc  $to-crd-s all-released ()
+  (k l) ret $to-crd-s all-released ()
+  (j ;) S-' $to-crd-s all-released ()
+
+  (j i) S-9 $to-crd-m all-released ()
+  (j o) S-0 $to-crd-m all-released ()
+  (k o) [ $to-crd-m all-released ()
+  (k p) ] $to-crd-m all-released ()
+  (l p) S-[ $to-crd-m all-released ()
+  (l [) S-] $to-crd-m all-released ()
+  (l ;) @: $to-crd-s all-released ()
+
+  (. /) = $to-crd-m all-released ()
+  (, .) @+ $to-crd-s all-released ()
+  (m ,) - $to-crd-s all-released ()
+  (m n) S-- $to-crd-s all-released ()
+)
+
+(deflayer (base)
+  _     _     _     _     _     _     _     _     _     _     _     _     _    del
+  @tab  _     _     _     _     _     _     _     _     _     _     _     _    _
+  bks   @a    @s    @d    @f    _     _     @j    @k    @l    @;    _          _
+  _     @z    _     _     _     _     _     _     @,    @.    @/               _
+        _     _     _             @spc                  _     _     _
+)
+
+
+(deflayer (sym)
+  XX    f1    f2    f3    f4    f5    f6    f7    f8    f9     f10   f11   f12   XX
+  XX    XX    @!    @@    @%    XX    XX    @&    @|    XX     XX    XX    XX    XX
+  @cpw  -     @+    =     @_    @^    @$    S-9   [     S-[    @::   `           XX
+  @NUM  XX    XX    @#    @~    bks   ret   S-0   ]     S-]    \              @MAC
+        @FN   @TYP  @SYM2              _                @SYM2  @TYP  _
+)
+
+
+(deflayer (sym2)
+  XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX
+  XX    XX    XX    @!=   XX    XX    XX    @&&   @||   @=>   XX    XX    XX    XX
+  caps  @<=   @>=   @==   @~=   @<-   @->   @drp  @[[   @{{   @->  @```         XX
+  XX    XX    XX    XX    XX    del   S-ret @dlp  @]]   @}}   @=>               XX
+        _     _     _               _                   _     _     _
+)
+
+(deflayer (typ)
+  XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX
+  XX    XX    XX    XX    @®   @™    XX    @«    @»    @‹    @›     XX    XX    XX
+  XX    @Æ    @§    @°    @𝑓   XX    XX    @“    @”    @‘    @’     XX          XX
+  XX    XX    XX    @©    XX   XX    XX    @µ    XX    @...  XX                 XX
+        _     _     _                _                  _     XX    XX
+)
+
+(deflayer (num)
+  XX    S-1   S-2   S-3   S-4   S-5   S-6   S-7   S-8   S-9   S-0    S--   =     bks
+  XX    XX    XX    XX    XX    S-9   S-3   7     8     9     -      S-=   /     \
+  XX    XX    XX    XX    XX    S-0   tab   4     5     6     0      =           ret
+  _     XX    XX    XX    XX    S-=   S-4   1     2     3     .                  rsft
+        _     _     bks           spc                  ent   esc   _
+)
+
+(deflayer (macros)
+  XX    @sec1 @sec2 @sec3 @sec4 @sec5 XX    XX    XX    XX    XX    XX    XX    XX
+  `     @rdm1 @rdm2 @rdm3 @rdm4 @rdm5 XX    XX    XX    XX    XX    XX    XX    XX
+  XX    @pdm1 @pdm2 @pdm3 @pdm4 @pdm5 XX    XX    XX    XX    XX    XX    XX
+  _     XX    XX    XX    XX    XX    XX    XX    XX    XX    XX                XX
+        _     _     XX           XX                  XX    XX    XX
+)
+
+(deflayer (fn)
+  XX    XX    XX    XX    XX    XX     XX    XX   XX    XX    XX    XX    XX    XX
+  XX    🔇    🔉    🔊    XX    XX     XX    XX   XX    XX    XX    pgup  pgdn  XX
+  XX    ◀◀    ▶⏸    ▶▶    XX    XX     ◀     ▼    ▲     ▶     esc   XX          XX
+  _     XX    lsft  lctl  XX    XX     XX    home  pgdn pgup  end                _
+        _     _     _              _                      _     _      _
+)

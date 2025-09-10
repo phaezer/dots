@@ -1,0 +1,42 @@
+(deftemplate auto-shift (key timeout)
+  ;; auto-shift activates the key if pressed within $timeout milliseconds
+  ;;  and send the shifted key if pressed longer than $timeout milliseconds.
+  (tap-hold-press-timeout $timeout $timeout $key $key (concat "S-" $key))
+)
+
+(deftemplate tap-hold-auto-shift (key hold-action tap-keys tap-timeout shift-timeout)
+  ;; key: the key to be tapped
+  ;; hold-action: the action to be performed if the key is held
+  ;; tap-timeout: the time in milliseconds before cascading to the tap-hold action
+  ;; shift-timeout: the time in milliseconds before activating the auto-shift
+  ;; hand: the hand to be used for the tap-hold action (left or right)
+
+  ;; tap-hold-release-keys activates $hold-action early if held and another input key is pressed and released.
+  ;;   The $tap-keys parameter is a list of key names.
+  ;;   Activates $tap-action early if a key within $tap-keys is pressed before hold activates.
+  (if-equal $tap-keys all ;; all keys, do not activate tap-hold-release-keys
+    (
+      tap-hold-release $tap-timeout $tap-timeout
+        ;; tap the key if within tap timeout
+        $key
+        ;; if activated early, the key will be tapped quickly
+        ;; if the key is was continuously pressed, it will be held
+        (tap-hold-press-timeout $shift-timeout $shift-timeout $hold-action $hold-action (concat "S-" $key))
+    )
+  )
+  (if-not-equal $tap-keys all
+    (
+      tap-hold-release-keys $tap-timeout $tap-timeout
+        ;; tap the key if within tap timeout
+        $key
+        ;; if activated early, the key will be tapped quickly
+        ;; if the key is was continuously pressed, it will be held
+        (tap-hold-press-timeout $shift-timeout $shift-timeout $hold-action $hold-action (concat "S-" $key))
+        $tap-keys
+    )
+  )
+)
+
+(defalias
+  as (t! auto-shift _ $timeout)
+)

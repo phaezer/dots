@@ -1,0 +1,1 @@
+ "" "public IP" i 'run-shell "/Users/eric/.config/tmux/plugins/tmux-menus/tools/public_ip.sh"' "Help  -->" H "run-shell '/Users/eric/.config/tmux/plugins/tmux-menus/items/help/help_extras.sh /Users/eric/.config/tmux/plugins/tmux-menus/items/extras.sh'"

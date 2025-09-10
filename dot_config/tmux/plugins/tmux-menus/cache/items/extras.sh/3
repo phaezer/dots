@@ -1,0 +1,1 @@
+ "" "-Dropbox      -->" D "run-shell '/Users/eric/.config/tmux/plugins/tmux-menus/items/external_tools/dropbox.sh'" "-Spotify      -->" S "run-shell '/Users/eric/.config/tmux/plugins/tmux-menus/items/external_tools/spotify.sh'" "-Mullvad VPN  -->" M "run-shell '/Users/eric/.config/tmux/plugins/tmux-menus/items/external_tools/mullvad.sh'"

@@ -1,0 +1,80 @@
+#! /bin/zsh
+
+export UI_THEME="tokyonight-storm"
+
+# all additional paths should be added here
+PATHS=(
+    # custom local binaries
+    "$HOME/.local/bin"
+    # spicetify
+    "$HOME/.spicetify"
+    # go binaries
+    "$HOME/go/bin"
+    # rust binaries
+    "$HOME/.cargo/bin"
+    # windsurf
+    "$HOME/.codeium/windsurf/bin"
+    # zvm
+    "$HOME/.zvm/bin"
+)
+
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+    export EDITOR='vim'
+else
+    export EDITOR='nvim'
+fi
+
+# zoxide init
+eval "$(zoxide init zsh)"
+
+# bat config
+# see: https://github.com/sharkdp/bat
+export BAT_THEME="tokyonight_storm"
+# use bat as manpager
+export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
+
+# add extra paths
+export PATH=$(IFS=:; echo "${PATHS[*]}:$PATH")
+
+# Oh My Zsh configuration.
+export ZSH="$HOME/.oh-my-zsh"
+
+plugins=(
+    gh
+    history
+    git
+    dotenv
+    fzf
+    pyenv
+    python
+    docker
+    aws
+    golang
+    npm
+    nvm
+    terraform
+    tmux
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    fast-syntax-highlighting
+    zsh-autocomplete
+    fzf-zsh-plugin
+)
+
+source $ZSH/oh-my-zsh.sh
+eval "$(starship init zsh)"
+
+# external aliases
+# shellcheck source=$HOME/.aliases.zsh
+[ -f "$HOME/.config/zsh/aliases.zsh" ] && source "$HOME/.config/zsh/aliases.zsh"
+
+# functions
+# shellcheck source=$HOME/.functions.zsh
+[ -f "$HOME/.config/zsh/functions.zsh" ] && source "$HOME/.config/zsh/functions.zsh"
+
+# secrets
+[ -f "$HOME/.config/zsh/secrets.zsh" ] && source "$HOME/.config/zsh/secrets.zsh"
+
+# opencode
+export PATH=/Users/eric/.opencode/bin:$PATH

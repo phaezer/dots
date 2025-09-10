@@ -1,0 +1,82 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "features": {
+    "edit_prediction_provider": "copilot"
+  },
+  "icon_theme": "Material Icon Theme",
+  "theme": "Catppuccin Mocha (Blur) [Heavy]",
+  "vim_mode": true,
+  "ui_font_size": 15,
+  "buffer_font_size": 15,
+  "buffer_font_family": "Iosevka Nerd Font",
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 1000
+    }
+  },
+  "base_keymap": "VSCode",
+  "tab_size": 2,
+  // "show_whitespaces": "boundary",
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware"
+    // "background_coloring": "indent_aware"
+  },
+  // langs
+  "languages": {
+    "Terraform": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "tofu",
+          "arguments": ["fmt", "{buffer_path}"]
+        }
+      },
+      "linter": {
+        "external": {
+          "command": "tofu",
+          "arguments": ["validate", "{buffer_path}"]
+        }
+      }
+    },
+    "TypeScript": {
+      "code_actions_on_format": {
+        "source.organizeImports": true
+      }
+    },
+    "TSX": {
+      "code_actions_on_format": {
+        "source.organizeImports": true
+      }
+    }
+  },
+  "lsp": {
+    "ansible-language-server": {
+      "settings": {
+        "ansible": {
+          "path": "ansible"
+        },
+        "executionEnvironment": {
+          "enabled": false
+        },
+        "python": {
+          "interpreterPath": "python3"
+        },
+        "validation": {
+          "enabled": true, // disable validation
+          "lint": {
+            "enabled": true, // disable ansible-lint
+            "path": "ansible-lint"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+# custom-shader = /Users/eric/.config/ghostty/shaders/cursor_smear.glsl
+# custom-shader-animation = always
+
+theme = tokyonight_storm
+
+shell-integration-features = no-cursor
+cursor-style-blink = false
+cursor-style = block
+
+# fonts
+font-family = "BerkeleyMonoCond Nerd Font Mono"
+font-size = 15                       
+font-thicken = true
+font-thicken-strength = 0
+adjust-underline-position = +6
+adjust-underline-thickness = -1
+adjust-box-thickness = +1
+adjust-cursor-thickness = +2
+adjust-box-thickness = -1
+
+window-padding-x = 4,2
+window-padding-y = 5
+
+link-url = true
+mouse-hide-while-typing = true
+
+# mac
+macos-titlebar-style = tabs
+macos-icon = xray
+macos-option-as-alt = left
+
+# keybindings
+keybind = super+s=toggle_quick_terminal
+keybind = super+r=reload_config
+keybind = cmd+shift+h=new_split:left
+keybind = cmd+shift+l=new_split:right
+keybind = cmd+shift+j=new_split:down
+keybind = cmd+shift+k=new_split:up
+
+keybind = cmd+h=goto_split:left
+keybind = cmd+l=goto_split:right
+keybind = cmd+j=goto_split:down
+keybind = cmd+k=goto_split:up
