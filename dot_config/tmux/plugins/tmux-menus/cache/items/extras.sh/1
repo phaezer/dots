@@ -1,1 +1,0 @@
-tmux display-menu -T '#[align=centre] Extras ' -x 'C' -y 'C' "Back to Main menu  <--" Left "run-shell '/Users/eric/.config/tmux/plugins/tmux-menus/items/main.sh'"
