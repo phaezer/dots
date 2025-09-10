@@ -39,3 +39,4 @@ git:
     squashMergeMessage: "{{selectedRef}} squash merged --> {{currentBranch}}"
 os:
   edit: nvim {{filename}}
+  editAtLine: nvim {{filename}}:{{line}}
