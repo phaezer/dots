@@ -23,3 +23,27 @@ fzf-git-log() {
 fzf-history() {
   eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -E 's/ *[0-9]*\*? *//' | sed -E 's/\\/\\\\/g')
 }
+
+# make dir and immediately cd into into it
+function mkd {
+  local flags=()
+  local positional=()
+  local cd_flag=0
+    
+  while (( $# )); do
+    case $1 in
+      -c)   cd_flag=1 ;;
+      -*)   flags+=("${@[@]}") ;;
+       *)   positional+=("${@[@]}"); break ;;
+    esac
+    shift
+  done
+
+  local dname="${positional[@]}"
+
+  if [ ! -z "$cd_flag" ]; then
+     mkdir ${flags[@]} $dname && z $dname
+  else
+     mkdir ${flags[@]} $dname 
+  fi
+}
