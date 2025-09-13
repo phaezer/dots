@@ -10,6 +10,7 @@
 
 
 (defsrc
+  esc  🔅   🔆   nop0 nop1 nop2 nop3 ◀◀   ▶⏸   ▶▶   🔇   🔉   🔊
   `    1    2    3    4    5    6    7    8    9    0    -    =   bks
   tab  q    w    e    r    t    y    u    i    o    p    [    ]     \
   caps a    s    d    f    g    h    j    k    l    ;    '        ret
@@ -72,7 +73,7 @@
   ;; layers
   SYM (layer-toggle sym)
   SYM2 (layer-toggle sym2)
-  TYP (layer-toggle typ)
+  ;; TYP (layer-toggle typ)
   NUM (layer-toggle num)
   MAC (layer-toggle macros)
   FN (layer-toggle fn)
@@ -80,11 +81,10 @@
   cpw (caps-word-toggle 1000)
 
   ;; layer tap holds
-  spc (tap-hold $to-tap-l $to-hld-m spc @SYM)
-  tab (tap-hold $to-tap-l $to-hld-m tab @hyp)
-  \ (tap-hold 0 $to-hld-m \ @hyp)
-  z (tap-hold 0 $to-hld-m z @FN)
-  / (tap-hold 0 $to-hld-m / @FN)
+  spc (tap-hold $to-tap-l $to-hld-s spc @SYM)
+  ;; \ (tap-hold 0 $to-hld-m \ @hyp)
+  ;; z (tap-hold 0 $to-hld-s z @FN)
+  ;; / (tap-hold 0 $to-hld-m / @FN)
 
   ;; dynamic macros
   rdm1 (dynamic-macro-record 1)
@@ -110,10 +110,10 @@
   l (t! mod-tap l ralt)
   ; (t! mod-tap ; rctl)
   ;; hyp / meh
-  x (t! mod-tap x @meh)
-  c (t! mod-tap c @hyp)
+  z (t! mod-tap z @meh)
+  x (t! mod-tap x @hyp)
   . (t! mod-tap . @hyp)
-  , (t! mod-tap , @meh)
+  / (t! mod-tap / @meh)
 )
 
 (defchordsv2
@@ -149,59 +149,76 @@
 )
 
 (deflayer (base)
-  _     _     _     _     _     _     _     _     _     _     _     _     _    del
-  @tab  _     _     _     _     _     _     _     _     _     _     _     _    _
-  bks   @a    @s    @d    @f    _     _     @j    @k    @l    @;    _          _
-  _     @z    _     _     _     _     _     _     @,    @.    @/               _
-        _     _     _             @spc                  _     _     _
+  _     _     _     _     _     _           _     _     _     _     _     _     _
+  _     _     _     _     _     _           _     _     _     _     _     _     _    del
+  _     _     _     _     _     _           _     _     _     _     _     _     _    _
+  bks   @a    @s    @d    @f    _           _     @j    @k    @l    @;    _          _
+  _     @z    @x    _     _     _           _     _     _     @.    @/               _
+        _     _     _                @spc                     _     _     _
 )
 
+
+;; (deflayer (sym)
+;;   _     _     _     _     _     _           _     _     _     _     _     _     _
+;;   XX    f1    f2    f3    f4    f5          f6    f7    f8    f9    f10   f11   f12    XX
+;;   XX    XX    XX    @!    XX    XX          XX    @{    @}    XX    XX    pgup  pgdn   XX
+;;   @cpw  @@    -     @+    =     @%          @^    S-9   S-0   @$    S-'    `           XX
+;;   @NUM  XX    XX    XX    @~    \           @&    [     ]     XX    @MAC               @TYP
+;;         @TYP  @FN   @SYM2             _                       @SYM2 @FN   _
+;; )
 
 (deflayer (sym)
-  XX    f1    f2    f3    f4    f5    f6    f7    f8    f9     f10   f11   f12   XX
-  XX    XX    @!    @@    @%    XX    XX    @&    @|    XX     XX    XX    XX    XX
-  @cpw  -     @+    =     @_    @^    @$    S-9   [     S-[    @::   `           XX
-  @NUM  XX    XX    @#    @~    bks   ret   S-0   ]     S-]    \              @MAC
-        @FN   @TYP  @SYM2              _                @SYM2  @TYP  _
+  _     _     _     _     _     _           _     _     _     _     _     _     _
+  XX    f1    f2    f3    f4    f5          f6    f7    f8    f9    f10   f11   f12    XX
+  XX    XX    @#    @$    @%    @{          @}    @*    @&    @|    @->   pgup  pgdn   XX
+  @cpw  @@    @~    @&    @|    S-9         S-0   -     @+    =     @::   `            XX
+  lsft  M-z   M-x   M-c   M-v   [           ]     @_    @^    @$    \                  @MAC
+        @NUM  @FN   @SYM2             _                       @SYM2 @FN   _
 )
-
 
 (deflayer (sym2)
-  XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX
-  XX    XX    XX    @!=   XX    XX    XX    @&&   @||   @=>   XX    XX    XX    XX
-  caps  @<=   @>=   @==   @~=   @<-   @->   @drp  @[[   @{{   @->  @```         XX
-  XX    XX    XX    XX    XX    del   S-ret @dlp  @]]   @}}   @=>               XX
-        _     _     _               _                   _     _     _
+  _     _     _     _     _     _           _     _     _     _     _     _     _
+  XX    @Æ    @§    @°    @𝑓    XX          XX    @〈   @〉   @《   @》   XX     XX    XX
+  XX    XX    @==   @®    @™    @{{         @}}   @«    @»    @‹    @›   @「    @」    XX
+  caps  @Æ    @§    @&&   @||   @drp        @dlp  @“    @”    @‘    @’   @```         XX
+  XX    XX    XX    @©    @!=   @[[         @]]   @µ    @<=   @>=   XX                XX
+        _     _     _                  _                   _     _     _
 )
 
-(deflayer (typ)
-  XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX
-  XX    XX    XX    XX    @®   @™    XX    @«    @»    @‹    @›     XX    XX    XX
-  XX    @Æ    @§    @°    @𝑓   XX    XX    @“    @”    @‘    @’     XX          XX
-  XX    XX    XX    @©    XX   XX    XX    @µ    XX    @...  XX                 XX
-        _     _     _                _                  _     XX    XX
-)
+
+
+;; (deflayer (typ)
+;;   _     _     _     _     _     _     _     _     _     _     _     _     _
+;;   XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX
+;;   XX    XX    XX    XX    @®   @™    XX    @«    @»    @‹    @›     XX    XX    XX
+;;   XX    @Æ    @§    @°    @𝑓   XX    XX    @“    @”    @‘    @’     XX          XX
+;;   XX    XX    XX    @©    XX   XX    XX    @µ    XX    @...  XX                 XX
+;;         _     _     _                _                  _     XX    XX
+;; )
 
 (deflayer (num)
-  XX    S-1   S-2   S-3   S-4   S-5   S-6   S-7   S-8   S-9   S-0    S--   =     bks
-  XX    XX    XX    XX    XX    S-9   S-3   7     8     9     -      S-=   /     \
-  XX    XX    XX    XX    XX    S-0   tab   4     5     6     0      =           ret
-  _     XX    XX    XX    XX    S-=   S-4   1     2     3     .                  rsft
-        _     _     bks           spc                  ent   esc   _
+  _     _     _     _     _     _          _     _     _     _     _     _     _
+  XX    S-1   S-2   S-3   S-4   S-5        S-6   S-7   S-8   S-9   S-0    S--   =     bks
+  XX    XX    XX    XX    XX    S-9        S-3   7     8     9     -      S-=   /     \
+  XX    XX    XX    XX    XX    S-0        tab   4     5     6     0      =           ret
+  _     XX    XX    XX    XX    S-=        S-4   1     2     3     .                  rsft
+        _     _     bks              spc                     ent   esc   _
 )
 
 (deflayer (macros)
-  XX    @sec1 @sec2 @sec3 @sec4 @sec5 XX    XX    XX    XX    XX    XX    XX    XX
-  `     @rdm1 @rdm2 @rdm3 @rdm4 @rdm5 XX    XX    XX    XX    XX    XX    XX    XX
-  XX    @pdm1 @pdm2 @pdm3 @pdm4 @pdm5 XX    XX    XX    XX    XX    XX    XX
-  _     XX    XX    XX    XX    XX    XX    XX    XX    XX    XX                XX
-        _     _     XX           XX                  XX    XX    XX
+  _     _     _     _     _     _          _     _     _     _     _     _     _
+  XX    @sec1 @sec2 @sec3 @sec4 @sec5      XX    XX    XX    XX    XX    XX    XX    XX
+  `     @rdm1 @rdm2 @rdm3 @rdm4 @rdm5      XX    XX    XX    XX    XX    XX    XX    XX
+  XX    @pdm1 @pdm2 @pdm3 @pdm4 @pdm5      XX    XX    XX    XX    XX    XX    XX
+  _     XX    XX    XX    XX    XX         XX    XX    XX    XX    XX                XX
+        _     _     XX                 XX                    XX    XX    XX
 )
 
 (deflayer (fn)
-  XX    XX    XX    XX    XX    XX     XX    XX   XX    XX    XX    XX    XX    XX
-  XX    🔇    🔉    🔊    XX    XX     XX    XX   XX    XX    XX    pgup  pgdn  XX
-  XX    ◀◀    ▶⏸    ▶▶    XX    XX     ◀     ▼    ▲     ▶     esc   XX          XX
-  _     XX    lsft  lctl  XX    XX     XX    home  pgdn pgup  end                _
-        _     _     _              _                      _     _      _
+  _     _     _     _     _     _          _     _     _     _     _     _     _
+  XX    XX    XX    XX    XX    XX         XX    XX   XX    XX    XX    XX    XX    XX
+  XX    🔇    🔉    🔊    XX    XX         XX    🔅   🔆    XX    XX    XX    XX    XX
+  XX    ◀◀    ▶⏸    ▶▶    XX    XX         ◀     ▼    ▲     ▶     esc   XX          XX
+  _     XX    lsft  lctl  XX    XX         XX    home  pgdn pgup  end                _
+        _     _     _                  _                          _     _      _
 )
