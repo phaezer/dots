@@ -1,0 +1,61 @@
+[default_session]
+startup_command = "nvim"
+preview_command = "eza --all --git --icons --color=always {}"
+
+# === sessions ===
+
+# config 
+[[session]]
+name = "neovim "
+path = "~/.config/nvim"
+
+[[session]]
+name = "tmux "
+path = "~/.config/tmux"
+
+[[session]]
+name = "kanata " 
+path = "~/.config/kanata"
+
+# pulsar projects
+[[session]]
+name = "plsr infrastructure "
+path = "~/projects/plsr/infra"
+windows = ["lazygit"]
+
+[[session]]
+name = "plsr golang   "
+path = "~/projects/plsr/go"
+windows = ["lazygit"]
+
+[[session]]
+name = "plsr rust   "
+path = "~/projects/plsr/rust"
+windows = ["lazygit"]
+
+[[session]]
+name = "plsr k8s   "
+path = "~/projects/plsr/k8s"
+windows = ["lazygit"]
+
+[[session]]
+name = "plsr zig   "
+path = "~/projects/plsr/zig"
+windows = ["lazygit"]
+
+# personal projects
+[[session]]
+name = "evil  "
+path = "~/projects/phaezer/evil"
+windows = ["lazygit"]
+
+[[session]]
+name = "tinygo "
+path = "~/projects/phaezer/tinygo"
+
+# === windows ===
+[[session]]
+name = "lazygit"
+startup_script = "lazygit"
+
+
