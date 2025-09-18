@@ -81,10 +81,8 @@
   cpw (caps-word-toggle 1000)
 
   ;; layer tap holds
-  spc (tap-hold $to-tap-l $to-hld-s spc @SYM)
-  ;; \ (tap-hold 0 $to-hld-m \ @hyp)
-  ;; z (tap-hold 0 $to-hld-s z @FN)
-  ;; / (tap-hold 0 $to-hld-m / @FN)
+  spc (tap-hold 125 125 spc @SYM)
+  tab  (tap-hold $to-tap-l $to-hld-s tab @FN)
 
   ;; dynamic macros
   rdm1 (dynamic-macro-record 1)
@@ -118,63 +116,62 @@
 
 (defchordsv2
   ;; LEFT HAND
+  ;; home row
   (s d) bks $to-crd-s all-released ()
-  (d f) del $to-crd-s all-released ()
-  (a f) @~  $to-crd-s all-released ()
-
-  (f e) @$ $to-crd-s all-released ()
-  (f w) @^ $to-crd-s all-released ()
-  (f q) ` $to-crd-s all-released ()
-  (d w) @@ $to-crd-m all-released ()
-  (q w) @! $to-crd-s all-released ()
-  (d q) @# $to-crd-m all-released ()
+  (d f) tab $to-crd-s all-released ()
+  (a f) @$  $to-crd-s all-released ()
+  (s f) @^  $to-crd-s all-released ()
+  (f g) S-9 $to-crd-s all-released ()
+  ;; top row
+  (q w) @!  $to-crd-s all-released ()
+  (r t) @{  $to-crd-s all-released ()
+  ;; bottom row
+  (c v) @%  $to-crd-s all-released ()
+  (x c) @#  $to-crd-s all-released ()
+  (v b) [   $to-crd-s all-released ()
+  ;; crosses
+  (f w) @@  $to-crd-m all-released ()
 
   ;; RIGHT HAND
+  ;; home row
   (j k) esc  $to-crd-s all-released ()
-  (k l) ret $to-crd-s all-released ()
-  (j ;) S-' $to-crd-s all-released ()
-
-  (j i) S-9 $to-crd-m all-released ()
-  (j o) S-0 $to-crd-m all-released ()
-  (k o) [ $to-crd-m all-released ()
-  (k p) ] $to-crd-m all-released ()
-  (l p) S-[ $to-crd-m all-released ()
-  (l [) S-] $to-crd-m all-released ()
-  (l ;) @: $to-crd-s all-released ()
-
-  (. /) = $to-crd-m all-released ()
-  (, .) @+ $to-crd-s all-released ()
-  (m ,) - $to-crd-s all-released ()
-  (m n) S-- $to-crd-s all-released ()
+  (k l) ret  $to-crd-s all-released ()
+  (j l) '    $to-crd-s all-released ()
+  (j ;) S-'  $to-crd-s all-released ()
+  (l ;) @:   $to-crd-s all-released ()
+  (h j) S-0  $to-crd-s all-released ()
+  ;; top row
+  (y u) @}   $to-crd-s all-released ()
+  (u i) @&   $to-crd-s all-released ()
+  (i o) @|   $to-crd-s all-released ()
+  (u o) \    $to-crd-s all-released ()
+  ;; bottom row
+  (n m) ]    $to-crd-s all-released ()
+  (m ,) @_   $to-crd-s all-released ()
+  (, .) =    $to-crd-s all-released ()
+  (m .) -    $to-crd-s all-released ()
+  (. /) @? $to-crd-m all-released ()
 )
 
 (deflayer (base)
   _     _     _     _     _     _           _     _     _     _     _     _     _
   _     _     _     _     _     _           _     _     _     _     _     _     _    del
-  _     _     _     _     _     _           _     _     _     _     _     _     _    _
+  @tab  _     _     _     _     _           _     _     _     _     _     _     _    _
   bks   @a    @s    @d    @f    _           _     @j    @k    @l    @;    _          _
   _     @z    @x    _     _     _           _     _     _     @.    @/               _
         _     _     _                @spc                     _     _     _
 )
 
-
-;; (deflayer (sym)
-;;   _     _     _     _     _     _           _     _     _     _     _     _     _
-;;   XX    f1    f2    f3    f4    f5          f6    f7    f8    f9    f10   f11   f12    XX
-;;   XX    XX    XX    @!    XX    XX          XX    @{    @}    XX    XX    pgup  pgdn   XX
-;;   @cpw  @@    -     @+    =     @%          @^    S-9   S-0   @$    S-'    `           XX
-;;   @NUM  XX    XX    XX    @~    \           @&    [     ]     XX    @MAC               @TYP
-;;         @TYP  @FN   @SYM2             _                       @SYM2 @FN   _
-;; )
-
 (deflayer (sym)
   _     _     _     _     _     _           _     _     _     _     _     _     _
   XX    f1    f2    f3    f4    f5          f6    f7    f8    f9    f10   f11   f12    XX
   XX    XX    @#    @$    @%    @{          @}    @*    @&    @|    @->   pgup  pgdn   XX
-  @cpw  @@    @~    @&    @|    S-9         S-0   -     @+    =     @::   `            XX
-  lsft  M-z   M-x   M-c   M-v   [           ]     @_    @^    @$    \                  @MAC
+  @cpw  @@    @~    @&    @|    S-9         S-0   -     =     @+    @::   `            XX
+  lsft  M-z   M-x   M-c   \     [           ]     @_    @^    @$    \                  @MAC
         @NUM  @FN   @SYM2             _                       @SYM2 @FN   _
 )
+
+;; TODO: en and em dashes
 
 (deflayer (sym2)
   _     _     _     _     _     _           _     _     _     _     _     _     _
@@ -184,8 +181,6 @@
   XX    XX    XX    @©    @!=   @[[         @]]   @µ    @<=   @>=   XX                XX
         _     _     _                  _                   _     _     _
 )
-
-
 
 ;; (deflayer (typ)
 ;;   _     _     _     _     _     _     _     _     _     _     _     _     _
