@@ -1,5 +1,7 @@
-# custom-shader = /Users/eric/.config/ghostty/shaders/cursor_smear.glsl
-# custom-shader-animation = always
+#custom-shader = /Users/eric/.config/ghostty/shaders/cursor_smear.glsl
+#custom-shader = /Users/eric/.config/ghostty/shaders/cursor_blaze2.glsl
+custom-shader = /Users/eric/.config/ghostty/shaders/cursor_spectre.glsl
+custom-shader-animation = always
 
 theme = tokyonight_storm
 
