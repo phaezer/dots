@@ -1,0 +1,7 @@
+secret*
+**/secret*
+.DS_Store
+Thumbs.db
+*~
+.vscode/
+.vscode/**
