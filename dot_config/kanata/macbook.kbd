@@ -81,7 +81,7 @@
   cpw (caps-word-toggle 1000)
 
   ;; layer tap holds
-  spc (tap-hold 125 125 spc @SYM)
+  spc (tap-hold 175 175 spc @SYM)
   tab  (tap-hold $to-tap-l $to-hld-s tab @FN)
 
   ;; dynamic macros
@@ -142,9 +142,9 @@
   (h j) S-0  $to-crd-s all-released ()
   ;; top row
   (y u) @}   $to-crd-s all-released ()
-  (u i) @&   $to-crd-s all-released ()
-  (i o) @|   $to-crd-s all-released ()
-  (u o) \    $to-crd-s all-released ()
+  (u o) @&   $to-crd-s all-released ()
+  (i p) @|   $to-crd-s all-released ()
+  (u p) \    $to-crd-s all-released ()
   ;; bottom row
   (n m) ]    $to-crd-s all-released ()
   (m ,) @_   $to-crd-s all-released ()
