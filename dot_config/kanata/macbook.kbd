@@ -1,6 +1,5 @@
 (include "lib/symbols.kbd")
 (include "lib/words.kbd")
-(include "secrets.kbd")
 
 (defcfg
   ;; required for chordsv2
@@ -33,23 +32,26 @@
   ;; chords
   to-crd-s 30
   to-crd-m 50
-  to-crd-l 150
+  to-crd-l 75
 
   ;; autoshift
   to-as 200
 
   ;; l/r hand keys
-  right-hand-except (
+  right-hand-keys (
     q w e r
-    ;; a s d f
+    a s d f
     z x c v
-    spc
+    spc 
+    up down left right
   )
-  left-hand-except (
+
+  left-hand-keys (
     u i o p
-    ;; j k l ;
+    j k l ;
     m , . /
-    spc
+    spc 
+    up down left right
   )
 )
 
@@ -60,7 +62,22 @@
 (deftemplate mod-tap (char mod)
   (switch
     ((key-timing 3 less-than 250)) $char break
-    () (tap-hold-release-timeout 200 400 $char $mod $char) break
+    ;;() (tap-hold-release-timeout 200 400 $char $mod $char) break
+    () (tap-hold 200 200 $char $mod) break
+  )
+)
+
+(deftemplate mod-tap-left (char mod)
+  (switch
+    ((key-timing 3 less-than 250)) $char break
+    () (tap-hold-release-keys 200 400 $char $mod $right-hand-keys) break
+  )
+)
+
+(deftemplate mod-tap-right (char mod)
+  (switch
+    ((key-timing 3 less-than 250)) $char break
+    () (tap-hold-release-keys 200 400 $char $mod $left-hand-keys) break
   )
 )
 
@@ -82,7 +99,9 @@
 
   ;; layer tap holds
   spc (tap-hold 175 175 spc @SYM)
-  tab  (tap-hold $to-tap-l $to-hld-s tab @FN)
+  g (t! mod-tap g @FN)
+  h (t! mod-tap h @FN)
+  tab (t! mod-tap tab @NUM)
 
   ;; dynamic macros
   rdm1 (dynamic-macro-record 1)
@@ -99,65 +118,68 @@
   ;; mod-tap keys
 
   ;; hrm
-  a (t! mod-tap a lctl)
-  s (t! mod-tap s lalt)
-  d (t! mod-tap d lmet)
-  f (t! mod-tap f lsft)
-  j (t! mod-tap j rsft)
-  k (t! mod-tap k rmet)
-  l (t! mod-tap l ralt)
-  ; (t! mod-tap ; rctl)
+  a (t! mod-tap-left a lctl)
+  s (t! mod-tap-left s lalt)
+  d (t! mod-tap-left d lmet)
+  f (t! mod-tap-left f lsft)
+  j (t! mod-tap-right j rsft)
+  k (t! mod-tap-right k rmet)
+  l (t! mod-tap-right l ralt)
+  ; (t! mod-tap-right ; rctl)
   ;; hyp / meh
-  z (t! mod-tap z @meh)
-  x (t! mod-tap x @hyp)
-  . (t! mod-tap . @hyp)
-  / (t! mod-tap / @meh)
+  z (t! mod-tap-left z @meh)
+  x (t! mod-tap-left x @hyp)
+  . (t! mod-tap-right . @hyp)
+  / (t! mod-tap-right / @meh)
 )
 
 (defchordsv2
   ;; LEFT HAND
   ;; home row
   (s d) bks $to-crd-s all-released ()
-  (d f) tab $to-crd-s all-released ()
-  (a f) @$  $to-crd-s all-released ()
-  (s f) @^  $to-crd-s all-released ()
-  (f g) S-9 $to-crd-s all-released ()
+  (d f) tab $to-crd-m all-released ()
+  (a d) @@  $to-crd-m all-released ()
+  (a f) @!  $to-crd-m all-released ()
+  (s f) S-9 $to-crd-m all-released ()
+  (d g) [   $to-crd-m all-released ()
+  (f g) @{  $to-crd-m all-released ()
   ;; top row
-  (q w) @!  $to-crd-s all-released ()
-  (r t) @{  $to-crd-s all-released ()
+  (q w) @!  $to-crd-m all-released ()
+  (q r) @#  $to-crd-m all-released ()
+  (r w) @%  $to-crd-l all-released ()
+  (r t) @~  $to-crd-m all-released ()
   ;; bottom row
-  (c v) @%  $to-crd-s all-released ()
-  (x c) @#  $to-crd-s all-released ()
-  (v b) [   $to-crd-s all-released ()
-  ;; crosses
-  (f w) @@  $to-crd-m all-released ()
+  (c v) @$  $to-crd-m all-released ()
+  (v b) @<  $to-crd-m all-released ()
 
   ;; RIGHT HAND
   ;; home row
-  (j k) esc  $to-crd-s all-released ()
-  (k l) ret  $to-crd-s all-released ()
-  (j l) '    $to-crd-s all-released ()
-  (j ;) S-'  $to-crd-s all-released ()
-  (l ;) @:   $to-crd-s all-released ()
-  (h j) S-0  $to-crd-s all-released ()
+  (j k) esc $to-crd-s all-released ()
+  (k l) ret $to-crd-s all-released ()
+  (k h) ]   $to-crd-s all-released ()
+  (j l) S-0 $to-crd-s all-released ()
+  (j ;) S-' $to-crd-m all-released ()
+  (l ;) @_  $to-crd-l all-released ()
+  (h j) @}  $to-crd-s all-released ()
   ;; top row
-  (y u) @}   $to-crd-s all-released ()
-  (u o) @&   $to-crd-s all-released ()
-  (i p) @|   $to-crd-s all-released ()
-  (u p) \    $to-crd-s all-released ()
+  (y u) @* $to-crd-s all-released ()
+  (u o) @& $to-crd-m all-released ()
+  (i p) @| $to-crd-m all-released ()
+  (u p) \  $to-crd-m all-released ()
   ;; bottom row
-  (n m) ]    $to-crd-s all-released ()
-  (m ,) @_   $to-crd-s all-released ()
-  (, .) =    $to-crd-s all-released ()
-  (m .) -    $to-crd-s all-released ()
+  (n m) @> $to-crd-s all-released ()
+  (m ,) @_ $to-crd-s all-released ()
+  (, .) =  $to-crd-l all-released ()
+  (n ,) @+ $to-crd-m all-released ()
+  (m .) -  $to-crd-m all-released ()
   (. /) @? $to-crd-m all-released ()
 )
 
 (deflayer (base)
   _     _     _     _     _     _           _     _     _     _     _     _     _
   _     _     _     _     _     _           _     _     _     _     _     _     _    del
-  @tab  _     _     _     _     _           _     _     _     _     _     _     _    _
-  bks   @a    @s    @d    @f    _           _     @j    @k    @l    @;    _          _
+  _     _     _     _     _     _           _     _     _     _     _     _     _    _
+  bks   @a    @s    @d    @f    @g          @h    @j    @k    @l    @;    _          _
   _     @z    @x    _     _     _           _     _     _     @.    @/               _
         _     _     _                @spc                     _     _     _
 )
@@ -165,40 +187,42 @@
 (deflayer (sym)
   _     _     _     _     _     _           _     _     _     _     _     _     _
   XX    f1    f2    f3    f4    f5          f6    f7    f8    f9    f10   f11   f12    XX
-  XX    XX    @#    @$    @%    @{          @}    @*    @&    @|    @->   pgup  pgdn   XX
-  @cpw  @@    @~    @&    @|    S-9         S-0   -     =     @+    @::   `            XX
-  lsft  M-z   M-x   M-c   \     [           ]     @_    @^    @$    \                  @MAC
+  XX    XX    @#    @$    @%    @~          \     @*    @^    @->   XX    pgup  pgdn   XX
+  @cpw  @@    @!    S-9   [     @{          @}    ]     S-0   @&    @|    `            XX
+  lsft  XX    XX    XX    @$    @<          @>    @_    -     @+    =                  @MAC
         @NUM  @FN   @SYM2             _                       @SYM2 @FN   _
 )
+
+;;(deflayer (sym)
+;;  _     _     _     _     _    _           _     _     _     _     _     _     _
+;;  XX    f1    f2    f3    f4   f5          f6    f7    f8    f9    f10   f11   f12    XX
+;;  XX    XX    @#    @$    @%   @{          @}    @*    @&    @|    @->   pgup  pgdn   XX
+;;  @cpw  @@    @~    @&    @|   S-9         S-0   -     =     @+    @::   `            XX
+;;  lsft  M-z   M-x   M-c   \    [           ]     @_    @^    @$    \                  @MAC
+;;        @FN  @NUM @SYM2             _                        @SYM2 @FN   _
+;;)
 
 ;; TODO: en and em dashes
 
 (deflayer (sym2)
   _     _     _     _     _     _           _     _     _     _     _     _     _
-  XX    @Æ    @§    @°    @𝑓    XX          XX    @〈   @〉   @《   @》   XX     XX    XX
-  XX    XX    @==   @®    @™    @{{         @}}   @«    @»    @‹    @›   @「    @」    XX
-  caps  @Æ    @§    @&&   @||   @drp        @dlp  @“    @”    @‘    @’   @```         XX
-  XX    XX    XX    @©    @!=   @[[         @]]   @µ    @<=   @>=   XX                XX
-        _     _     _                  _                   _     _     _
+  XX    @Æ    @§    @°    @𝑓    XX          XX    @〈   @〉   @《   @》  XX     XX     XX
+  XX    XX    @==   @®    @™    XX          XX    @«    @»    @‹    @›   @「    @」    XX
+  caps  @Æ    @§    @drp  @[[   @{{         @}}   @]]   @dlp  @‘    @’   @```          XX
+  XX    XX    XX    @©    @!=   @<=         @>=   @µ    @“    @”    XX                 XX
+        _     _     _                  _                      _     _     _
 )
-
-;; (deflayer (typ)
-;;   _     _     _     _     _     _     _     _     _     _     _     _     _
-;;   XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX
-;;   XX    XX    XX    XX    @®   @™    XX    @«    @»    @‹    @›     XX    XX    XX
-;;   XX    @Æ    @§    @°    @𝑓   XX    XX    @“    @”    @‘    @’     XX          XX
-;;   XX    XX    XX    @©    XX   XX    XX    @µ    XX    @...  XX                 XX
-;;         _     _     _                _                  _     XX    XX
-;; )
 
 (deflayer (num)
   _     _     _     _     _     _          _     _     _     _     _     _     _
-  XX    S-1   S-2   S-3   S-4   S-5        S-6   S-7   S-8   S-9   S-0    S--   =     bks
-  XX    XX    XX    XX    XX    S-9        S-3   7     8     9     -      S-=   /     \
-  XX    XX    XX    XX    XX    S-0        tab   4     5     6     0      =           ret
-  _     XX    XX    XX    XX    S-=        S-4   1     2     3     .                  rsft
-        _     _     bks              spc                     ent   esc   _
+  XX    @!    @@    @#    @$    @%         @^    @&    @*    S-9   S-0   @_    =     bks
+  XX    XX    XX    XX    XX    S-9        @#    7     8     9     0     @+    /     \
+  XX    XX    XX    XX    XX    S-0        @$    4     5     6     @+    =           ret
+  _     XX    XX    XX    XX    @+         ,     1     2     3     .                 rsft
+        _     _     bks                _                     0     ent   _
 )
+
+(include "secrets.kbd")
 
 (deflayer (macros)
   _     _     _     _     _     _          _     _     _     _     _     _     _
@@ -210,10 +234,10 @@
 )
 
 (deflayer (fn)
-  _     _     _     _     _     _          _     _     _     _     _     _     _
+  _     _     _     _     _     _          _     _    _     _     _     _     _
   XX    XX    XX    XX    XX    XX         XX    XX   XX    XX    XX    XX    XX    XX
-  XX    🔇    🔉    🔊    XX    XX         XX    🔅   🔆    XX    XX    XX    XX    XX
-  XX    ◀◀    ▶⏸    ▶▶    XX    XX         ◀     ▼    ▲     ▶     esc   XX          XX
-  _     XX    lsft  lctl  XX    XX         XX    home  pgdn pgup  end                _
+  XX    XX    🔇    🔉    🔊    XX         XX    🔅   🔆    XX    XX    XX    XX    XX
+  XX    XX    ◀◀    ▶⏸    ▶▶    XX         ◀     ▼    ▲     ▶     esc   XX          XX
+  _     XX    lsft  lctl  XX    XX         pgdn pgup  home  end   XX                _
         _     _     _                  _                          _     _      _
 )
