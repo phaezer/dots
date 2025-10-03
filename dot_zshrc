@@ -69,3 +69,7 @@ source "$HOME/.config/zsh/aliases.zsh"
 source "$HOME/.config/zsh/functions.zsh"
 source "$HOME/.config/zsh/secrets.zsh"
 source "$HOME/.config/zsh/fzf.zsh"
+source "$HOME/.config/zsh/theme.zsh"
+
+# activate mise
+eval "$(~/.local/bin/mise activate zsh)"
