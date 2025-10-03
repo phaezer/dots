@@ -138,41 +138,46 @@
   ;; home row
   (s d) bks $to-crd-s all-released ()
   (d f) tab $to-crd-m all-released ()
-  (a d) @@  $to-crd-m all-released ()
-  (a f) @!  $to-crd-m all-released ()
+  (a f) @@  $to-crd-m all-released ()
   (s f) S-9 $to-crd-m all-released ()
-  (d g) [   $to-crd-m all-released ()
-  (f g) @{  $to-crd-m all-released ()
+  (s d f) @{ $to-crd-l all-released ()
+  (f g) [   $to-crd-m all-released ()
   ;; top row
-  (q w) @!  $to-crd-m all-released ()
-  (q r) @#  $to-crd-m all-released ()
+  (q r) @~  $to-crd-m all-released ()
   (r w) @%  $to-crd-l all-released ()
-  (r t) @~  $to-crd-m all-released ()
   ;; bottom row
-  (c v) @$  $to-crd-m all-released ()
-  (v b) @<  $to-crd-m all-released ()
+  (c v) @~  $to-crd-m all-released ()
+  ;; crosses / extended
+  (f e s) @^  $to-crd-l all-released ()
+  (f w) @$  $to-crd-m all-released ()
 
   ;; RIGHT HAND
   ;; home row
   (j k) esc $to-crd-s all-released ()
   (k l) ret $to-crd-s all-released ()
-  (k h) ]   $to-crd-s all-released ()
+  (k h) -   $to-crd-s all-released ()
   (j l) S-0 $to-crd-s all-released ()
   (j ;) S-' $to-crd-m all-released ()
-  (l ;) @_  $to-crd-l all-released ()
-  (h j) @}  $to-crd-s all-released ()
+  (l ;) - $to-crd-m all-released ()
+  (h j) ]   $to-crd-s all-released ()
+  (j k l) @} $to-crd-l all-released ()
   ;; top row
-  (y u) @* $to-crd-s all-released ()
-  (u o) @& $to-crd-m all-released ()
-  (i p) @| $to-crd-m all-released ()
-  (u p) \  $to-crd-m all-released ()
+  (y u) @$ $to-crd-s all-released ()
+  (y o) @* $to-crd-m all-released ()
+  (i p) \  $to-crd-m all-released ()
   ;; bottom row
-  (n m) @> $to-crd-s all-released ()
+  (n m ,) @— $to-crd-l all-released ()
   (m ,) @_ $to-crd-s all-released ()
-  (, .) =  $to-crd-l all-released ()
-  (n ,) @+ $to-crd-m all-released ()
-  (m .) -  $to-crd-m all-released ()
+  (, .) @^ $to-crd-m all-released ()
+  (m .) @$ $to-crd-m all-released ()
   (. /) @? $to-crd-m all-released ()
+  ;; crosses / extended
+  (j i l) = $to-crd-l all-released ()
+  (j i o) @+ $to-crd-l all-released ()
+
+  ;; both hands
+  ;; screenshot 
+  (d f j k) (multi lalt lsft 5) $to-crd-l all-released ()
 )
 
 (deflayer (base)
@@ -187,29 +192,18 @@
 (deflayer (sym)
   _     _     _     _     _     _           _     _     _     _     _     _     _
   XX    f1    f2    f3    f4    f5          f6    f7    f8    f9    f10   f11   f12    XX
-  XX    XX    @#    @$    @%    @~          \     @*    @^    @->   XX    pgup  pgdn   XX
-  @cpw  @@    @!    S-9   [     @{          @}    ]     S-0   @&    @|    `            XX
-  lsft  XX    XX    XX    @$    @<          @>    @_    -     @+    =                  @MAC
+  XX    @?    @!    @#    @%    @~          @^    @$    @*    @|    @->   pgup  pgdn   XX
+  @cpw  @&    @|    @$    S-9   [           ]     S-0   =     -     @+    `            XX
+  lsft  XX    XX    @~    /     @{          @}    @_    @^    @$    \                  @MAC
         @NUM  @FN   @SYM2             _                       @SYM2 @FN   _
 )
-
-;;(deflayer (sym)
-;;  _     _     _     _     _    _           _     _     _     _     _     _     _
-;;  XX    f1    f2    f3    f4   f5          f6    f7    f8    f9    f10   f11   f12    XX
-;;  XX    XX    @#    @$    @%   @{          @}    @*    @&    @|    @->   pgup  pgdn   XX
-;;  @cpw  @@    @~    @&    @|   S-9         S-0   -     =     @+    @::   `            XX
-;;  lsft  M-z   M-x   M-c   \    [           ]     @_    @^    @$    \                  @MAC
-;;        @FN  @NUM @SYM2             _                        @SYM2 @FN   _
-;;)
-
-;; TODO: en and em dashes
 
 (deflayer (sym2)
   _     _     _     _     _     _           _     _     _     _     _     _     _
   XX    @Æ    @§    @°    @𝑓    XX          XX    @〈   @〉   @《   @》  XX     XX     XX
   XX    XX    @==   @®    @™    XX          XX    @«    @»    @‹    @›   @「    @」    XX
-  caps  @Æ    @§    @drp  @[[   @{{         @}}   @]]   @dlp  @‘    @’   @```          XX
-  XX    XX    XX    @©    @!=   @<=         @>=   @µ    @“    @”    XX                 XX
+  caps  @Æ    @§    @!=   @drp  @[[         @]]   @dlp  @‘    @’    @“   @”            XX
+  XX    XX    XX    @©    @!=   @{{         @}}   @—    @<=   @>=   @–                 XX
         _     _     _                  _                      _     _     _
 )
 
