@@ -1,0 +1,11 @@
+{
+  "includeCoAuthoredBy": true,
+  "cleaupPeriodDays": 60,
+  "permissions": {
+    "deny": ["Read(./secrets/**)", "Read(./vault_key)", "Read(./vaultkey)", "Read(./build)"],
+    "ask": ["Bash(git push:*)", "Bash(curl:*)"]
+  },
+  "env": {
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
+  }
+}
