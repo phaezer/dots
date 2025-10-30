@@ -24,8 +24,9 @@
   tmpl (macro t e m p l a t e)
   bcz (macro b e c a u s e)
   phz (macro p h a e z e r)
+  http (macro h t t p s @: / /)
 
-  ;; frequent comment openers
+  ;; frequent comment flags
   #NOT (macro S-n S-o S-t S-e S-; spc)
   #FIX (macro S-f S-i S-x S-; spc)
   #TDO (macro S-t S-o S-d S-o S-; spc)
