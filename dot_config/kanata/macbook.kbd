@@ -39,18 +39,24 @@
 
   ;; l/r hand keys
   right-hand-keys (
+    ` 1 2 3 4 5 6 7 8 9 0 - =
+    [ ] \
+    tab ret bks
     q w e r
     a s d f
     z x c v
-    spc 
+    spc
     up down left right
   )
 
   left-hand-keys (
+    ` 1 2 3 4 5 6 7 8 9 0 - =
+    [ ] \
+    tab ret bks
     u i o p
     j k l ;
     m , . /
-    spc 
+    spc
     up down left right
   )
 )
@@ -70,14 +76,14 @@
 (deftemplate mod-tap-left (char mod)
   (switch
     ((key-timing 3 less-than 250)) $char break
-    () (tap-hold-release-keys 200 400 $char $mod $right-hand-keys) break
+    () (tap-hold-release-keys 200 300 $char $mod $right-hand-keys) break
   )
 )
 
 (deftemplate mod-tap-right (char mod)
   (switch
     ((key-timing 3 less-than 250)) $char break
-    () (tap-hold-release-keys 200 400 $char $mod $left-hand-keys) break
+    () (tap-hold-release-keys 200 300 $char $mod $left-hand-keys) break
   )
 )
 
@@ -136,47 +142,37 @@
 (defchordsv2
   ;; LEFT HAND
   ;; home row
-  (s d) bks $to-crd-s all-released ()
-  (d f) tab $to-crd-m all-released ()
-  (a f) @@  $to-crd-m all-released ()
-  (s f) S-9 $to-crd-m all-released ()
-  (s d f) @{ $to-crd-l all-released ()
-  (f g) [   $to-crd-m all-released ()
+  (s d) @& $to-crd-s all-released ()
+  (d f) @| $to-crd-m all-released ()
+  (a f) @! $to-crd-m all-released ()
+  (s f) @@ $to-crd-s all-released ()
+  (f g) @^ $to-crd-m all-released ()
   ;; top row
-  (q r) @~  $to-crd-m all-released ()
-  (r w) @%  $to-crd-l all-released ()
   ;; bottom row
-  (c v) @~  $to-crd-m all-released ()
+  (z x) \  $to-crd-m all-released ()
+  (c v) @~ $to-crd-m all-released ()
+  (c x) ` $to-crd-m all-released ()
   ;; crosses / extended
-  (f e s) @^  $to-crd-l all-released ()
-  (f w) @$  $to-crd-m all-released ()
+  (f e s) @%  $to-crd-l all-released ()
 
   ;; RIGHT HAND
   ;; home row
   (j k) esc $to-crd-s all-released ()
-  (k l) ret $to-crd-s all-released ()
-  (k h) -   $to-crd-s all-released ()
-  (j l) S-0 $to-crd-s all-released ()
+  (k l) =   $to-crd-s all-released ()
+  (l ;) -   $to-crd-m all-released ()
+  (j l) @+  $to-crd-s all-released ()
   (j ;) S-' $to-crd-m all-released ()
-  (l ;) - $to-crd-m all-released ()
-  (h j) ]   $to-crd-s all-released ()
-  (j k l) @} $to-crd-l all-released ()
+  (h j) @$  $to-crd-s all-released ()
   ;; top row
-  (y u) @$ $to-crd-s all-released ()
-  (y o) @* $to-crd-m all-released ()
-  (i p) \  $to-crd-m all-released ()
   ;; bottom row
   (n m ,) @— $to-crd-l all-released ()
   (m ,) @_ $to-crd-s all-released ()
   (, .) @^ $to-crd-m all-released ()
-  (m .) @$ $to-crd-m all-released ()
-  (. /) @? $to-crd-m all-released ()
   ;; crosses / extended
-  (j i l) = $to-crd-l all-released ()
-  (j i o) @+ $to-crd-l all-released ()
+  (j i l) @* $to-crd-l all-released ()
 
   ;; both hands
-  ;; screenshot 
+  ;; screenshot
   (d f j k) (multi lalt lsft 5) $to-crd-l all-released ()
 )
 
@@ -230,7 +226,7 @@
 (deflayer (fn)
   _     _     _     _     _     _          _     _    _     _     _     _     _
   XX    XX    XX    XX    XX    XX         XX    XX   XX    XX    XX    XX    XX    XX
-  XX    XX    🔇    🔉    🔊    XX         XX    🔅   🔆    XX    XX    XX    XX    XX
+  XX    XX    🔇    🔉    🔊    XX         XX    XX   🔅    🔆     XX    XX    XX    XX
   XX    XX    ◀◀    ▶⏸    ▶▶    XX         ◀     ▼    ▲     ▶     esc   XX          XX
   _     XX    lsft  lctl  XX    XX         pgdn pgup  home  end   XX                _
         _     _     _                  _                          _     _      _
