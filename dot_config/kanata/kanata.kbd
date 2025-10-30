@@ -1,0 +1,120 @@
+(platform (macos)
+  (defsrc
+    `    1    2    3    4    5    6    7    8    9    0    -    =    bks
+    tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+    caps a    s    d    f    g    h    j    k    l    ;    '    ret
+    lsft z    x    c    v    b    n    m    ,    .    /    rsft
+    fn   lctl lalt lmet        spc          rmet ralt      (t! arrows)
+  )
+)
+
+
+(platform (win winiov2 wintercept linux)
+  (defsrc
+    `    1    2    3    4    5    6    7    8    9    0    -    =    bks
+    tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+    caps a    s    d    f    g    h    j    k    l    ;    '    ret
+    lsft z    x    c    v    b    n    m    ,    .    /    rsft
+         lctl lmet lalt        spc          ralt rmet rctl (t! arrows)
+  )
+)
+
+(defvar
+  tap-timeout-short 50
+  tap-timeout 100
+  tap-timeout-long 200
+  hold-timeout-short 100
+  hold-timeout 150
+  hold-timeout-long 300
+  ;; $chord-timeout 12
+  left-hand-keys (` 1 2 3 4 5 6 q w e r t a s d f g h z x c v b)
+  right-hand-keys (7 8 9 0 - = y u i o p [ ] \ h j k l ; ' n m , . /)
+
+  ;; abbreviated names
+  tt $tap-timeout
+  ttl $tap-timeout-long
+  ht $hold-timeout
+  htl $hold-timeout-long
+  rhk $right-hand-keys
+  lhk $left-hand-keys
+)
+
+;; common aliases
+(defalias
+  ;; space when tapped, shift when held
+  spcsym (tap-hold-release $ttl $htl spc @sym1)
+
+  ;; mod taps - left hand
+  ah (tap-hold $tt $ht a lsft)
+  zh (tap-hold $tt $ht z lctl)
+  xh (tap-hold $tt $ht x lalt)
+  ch (tap-hold-release $ttl $htl c @sym2)
+  vh (tap-hold-release $ttl $htl v @sym3)
+
+  ;; mod taps - right hand
+  /h (tap-hold $tt $ht / rctl)
+  ;h (tap-hold $tt $ht ; lsft)
+  .h (tap-hold $tt $ht . ralt)
+  ,h (tap-hold-release $ttl $htl , @sym2)
+  mh (tap-hold-release $ttl $htl m @sym3)
+
+  ;; tap dance
+  ;; tap caps word, double tap capslock
+  cpswd (tap-dance 200 ((caps-word-toggle 1000) CapsLock))
+)
+
+(platform (macos)
+  (deflayer (base)
+    `       1       2       3       4       5       6       7       8       9       0      -      =      @cpswd
+    tab     q       w       e       r       t       y       u       i       o       p      [      ]      \
+    bks     @ah     s       d       f       g       h       j       k       l       ;      '      ret
+    lsft    z       x       c       v       b       n       m       ,       .       /      rsft
+    fn      lctl    lalt    lmet              @spcsym               rmet    ralt    ◀      ▲      ▼      ▶
+  )
+)
+
+(platform (macos)
+  (deflayer (sym1)
+    S-`     f1      f2      f3     f4       f5      f6      f7      f8      f9      f10    f11    f12    _
+    S-tab   S-`     S-w     S-e     S-r     S-t     S-y     S-u     S-i     S-o     S-p    S-[    S-]    S-\
+    @delwd  S-a     S-s     S-d     S-f     S-g     S-h     S-j     S-k     S-l     S-;    S-'    S-ret
+    @cpswd  S-z     S-x     S-c     S-v     S-b     S-n     S-m     S-,     S-.     S-/    @capswd
+    fn      lctl    lalt    lmet                esc                 rmet    ralt    home   pgup   pgdn   end
+  )
+)
+
+(platform (macos)
+  ;; symbols
+  ;; most commonly used symbols and symbol sets: ( ) { } [ ] ' " - _ . , + = / \ | : ; < > ? @ # :: -> != && || ~ ^
+  ;;   ~   #  $  %  <-    -> ^ * \  :: home end
+  ;;   @   !  =  +  &     |  -  ( [ { :  `
+  ;;   ... != <= >= &&    || _  ) ] } //
+
+  (deflayer (syms)
+    XX      XX      XX      XX      XX      XX      XX      XX      XX      XX      XX     XX     XX     XX
+    _       S-`     S-3     S-4     S-5     @arr_l  @arr_r  S-6     S-8    \       @2col    home   end    XX
+    _       S-2     S-1     =       S-=     S-7     S-\     -       S-9     [       S-[     S-;   `
+    _       @sprd   @neql   @lte    @gte    @2amp   @2bar   S--     S-0     ]       S-]     @2slsh
+    _       _       _       esc                  _                    esc       _       _      _      _      _
+  )
+)
+
+(platform (macos)
+  (deflayer (nums)
+    XX      XX      XX      XX      XX      XX      S-6     S-7    S-8     S-9     S-0     XX     XX    XX
+    XX      XX      XX      XX      XX      XX      S-3     7      8       9       -       [      ]     \
+    XX      XX      XX      XX      XX      XX      S-4     4      5       6       S-=     XX     _
+    XX      XX      XX      XX      XX      XX      0       1      2       3       =       /
+    XX      XX      XX      XX              _                      ent     XX      XX      XX     XX    XX
+  )
+)
+
+(platform (macos)
+  (deflayer (r-mv)
+    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+    _    _    _    _    _    _    ◀    ▲    ▼    ▶    _    _    _
+    _    _    _    _    _    _    _    _    _    _    _    _
+    _    _    _    _              _              _    _    _ _ _ _
+  )
+)
