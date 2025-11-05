@@ -56,6 +56,7 @@ plugins=(
     nvm
     terraform
     tmux
+    direnv
     zsh-autosuggestions
     zsh-syntax-highlighting
     fast-syntax-highlighting
@@ -73,3 +74,6 @@ source "$HOME/.config/zsh/theme.zsh"
 
 # activate mise
 eval "$(~/.local/bin/mise activate zsh)"
+
+# load direnv
+eval "$(direnv hook zsh)"
