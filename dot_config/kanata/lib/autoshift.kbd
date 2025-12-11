@@ -1,42 +1,60 @@
-(deftemplate auto-shift (key timeout)
-  ;; auto-shift activates the key if pressed within $timeout milliseconds
-  ;;  and send the shifted key if pressed longer than $timeout milliseconds.
-  (tap-hold-press-timeout $timeout $timeout $key $key (concat "S-" $key))
+(defvar
+ ;; autoshift
+  to-as 175
 )
 
-(deftemplate tap-hold-auto-shift (key hold-action tap-keys tap-timeout shift-timeout)
-  ;; key: the key to be tapped
-  ;; hold-action: the action to be performed if the key is held
-  ;; tap-timeout: the time in milliseconds before cascading to the tap-hold action
-  ;; shift-timeout: the time in milliseconds before activating the auto-shift
-  ;; hand: the hand to be used for the tap-hold action (left or right)
-
-  ;; tap-hold-release-keys activates $hold-action early if held and another input key is pressed and released.
-  ;;   The $tap-keys parameter is a list of key names.
-  ;;   Activates $tap-action early if a key within $tap-keys is pressed before hold activates.
-  (if-equal $tap-keys all ;; all keys, do not activate tap-hold-release-keys
-    (
-      tap-hold-release $tap-timeout $tap-timeout
-        ;; tap the key if within tap timeout
-        $key
-        ;; if activated early, the key will be tapped quickly
-        ;; if the key is was continuously pressed, it will be held
-        (tap-hold-press-timeout $shift-timeout $shift-timeout $hold-action $hold-action (concat "S-" $key))
-    )
-  )
-  (if-not-equal $tap-keys all
-    (
-      tap-hold-release-keys $tap-timeout $tap-timeout
-        ;; tap the key if within tap timeout
-        $key
-        ;; if activated early, the key will be tapped quickly
-        ;; if the key is was continuously pressed, it will be held
-        (tap-hold-press-timeout $shift-timeout $shift-timeout $hold-action $hold-action (concat "S-" $key))
-        $tap-keys
-    )
-  )
+(deftemplate auto-shift (key)
+  (tap-hold-press-timeout $to-as $to-as $key $key (concat "S-" $key))
 )
 
+;; auto-shifted keys
 (defalias
-  as (t! auto-shift _ $timeout)
+  sq (t! auto-shift q)
+  sw (t! auto-shift w)
+  se (t! auto-shift e)
+  sr (t! auto-shift r)
+  st (t! auto-shift t)
+  sy (t! auto-shift y)
+  su (t! auto-shift u)
+  si (t! auto-shift i)
+  so (t! auto-shift o)
+  sp (t! auto-shift p)
+  sa (t! auto-shift a)
+  ss (t! auto-shift s)
+  sd (t! auto-shift d)
+  sf (t! auto-shift f)
+  sg (t! auto-shift g)
+  sh (t! auto-shift h)
+  sj (t! auto-shift j)
+  sk (t! auto-shift k)
+  sl (t! auto-shift l)
+  sz (t! auto-shift z)
+  sx (t! auto-shift x)
+  sc (t! auto-shift c)
+  sv (t! auto-shift v)
+  sb (t! auto-shift b)
+  sn (t! auto-shift n)
+  sm (t! auto-shift m)
+
+  s, (t! auto-shift ,)
+  s. (t! auto-shift .)
+  s` (t! auto-shift `)
+  s; (t! auto-shift ;)
+  s' (t! auto-shift ')
+  s/ (t! auto-shift /)
+  s1 (t! auto-shift 1)
+  s2 (t! auto-shift 2)
+  s3 (t! auto-shift 3)
+  s4 (t! auto-shift 4)
+  s5 (t! auto-shift 5)
+  s6 (t! auto-shift 6)
+  s7 (t! auto-shift 7)
+  s8 (t! auto-shift 8)
+  s9 (t! auto-shift 9)
+  s0 (t! auto-shift 0)
+  s- (t! auto-shift -)
+  s= (t! auto-shift =)
+  s[ (t! auto-shift [)
+  s] (t! auto-shift ])
+  s\ (t! auto-shift \)
 )
