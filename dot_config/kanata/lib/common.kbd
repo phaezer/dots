@@ -1,0 +1,384 @@
+;; template for tapping virtual keys
+(deftemplate tv (key)
+  (on-press tap-vkey $key)
+)
+
+;; templated sequence definition
+(deftemplate seq (vk in out)
+  (defvirtualkeys $vk $out)
+  (defseq $vk $in)
+)
+
+;; common aliases
+(defalias
+  0 0
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+
+  A S-a
+  B S-b
+  C S-c
+  D S-d
+  E S-e
+  F S-f
+  G S-g
+  H S-h
+  I S-i
+  J S-j
+  K S-k
+  L S-l
+  M S-m
+  N S-n
+  O S-o
+  P S-p
+  Q S-q
+  R S-r
+  S S-s
+  T S-t
+  U S-u
+  V S-v
+  W S-w
+  X S-x
+  Y S-y
+  Z S-z
+
+  ! S-1
+  @ S-2
+  # S-3
+  $ S-4
+  % S-5
+  ^ S-6
+  & S-7
+  * S-8
+  | S-\
+  ~ S-`
+  + S-=
+  _ S--
+  { S-[
+  } S-]
+  : S-;
+  < S-,
+  > S-.
+  ? S-/
+  dq S-'
+
+  ;; code symbol macros
+  --- (macro - - -)
+  ``` (macro ` ` `)
+  ... (macro . . .)
+  === (macro = = =)
+  [[ (macro [ [)
+  drp (macro S-9 S-9)
+  dlp (macro S-0 S-0)
+  ]] (macro ] ])
+  {{ (macro @{ @{)
+  }} (macro @{ @})
+  >= (macro @> =)
+  == (macro = =)
+  != (macro = =)
+  <= (macro @< =)
+  && (macro @& @&)
+  || (macro @| @|)
+  :: (macro @: @:)
+  &= (macro @& =)
+  ^= (macro @^ =)
+  ~= (macro @~ =)
+  -= (macro - =)
+  += (macro @+ =)
+  ;; templating helpers
+  {% (macro @{ @%)
+  %} (macro @% @})
+
+  ;; arrows
+  -> (macro - S-.)
+  --> (macro - - S-.)
+  <- (macro S-, -)
+  <-- (macro S-, - -)
+  => (macro = S-.)
+  ==> (macro = = S-.)
+  <=> (macro S-, = S-.)
+  <== (macro S-< = =)
+)
+
+(platform (win linux)
+  (defalias
+    ;; unicode
+    “ (unicode “)
+    ” (unicode ”)
+    ‘ (unicode ‘)
+    ’ (unicode ’)
+
+    « (unicode «)
+    » (unicode »)
+    ‹ (unicode ‹)
+    › (unicode ›)
+
+    「 (unicode 「)
+    」 (unicode 」)
+    『 (unicode 『)
+    』 (unicode 』)
+
+    〈 (unicode 〈)
+    〉 (unicode 〉)
+    《 (unicode 《)
+    》 (unicode 》)
+
+    ′ (unicode ′)
+    ″ (unicode ″)
+    ‴ (unicode ‴)
+
+    ® (unicode ®)
+    ™ (unicode ™)
+    § (unicode §)
+    © (unicode ©)
+    ° (unicode °)
+    Æ (unicode Æ)
+    µ (unicode µ)
+    𝑓 (unicode 𝑓)
+  )
+)
+(platform (macos)
+ (defalias
+  “ (macro A-u A-2 A-0 A-1 A-c)
+  ” (macro A-u A-2 A-0 A-1 A-d)
+  ‘ (macro A-u A-2 A-0 A-1 A-8)
+  ’ (macro A-u A-2 A-0 A-1 A-9)
+
+  « (macro A-u A-0 A-0 A-a A-b)
+  » (macro A-u A-0 A-0 A-b A-b)
+  ‹ (macro A-u A-2 A-0 A-3 A-9)
+  › (macro A-u A-2 A-0 A-3 A-a)
+
+ 「 (macro A-u A-3 A-0 A-0 A-c)
+  」(macro A-u A-3 A-0 A-0 A-d)
+  『 (macro A-u A-3 A-0 A-0 A-e)
+  』 (macro A-u A-3 A-0 A-0 A-f)
+
+  〈 (macro A-u A-3 A-0 A-0 A-8)
+  〉 (macro A-u A-3 A-0 A-0 A-9)
+  《 (macro A-u A-3 A-0 A-0 A-a)
+  》(macro A-u A-3 A-0 A-0 A-b)
+
+  ′ (macro A-u A-2 A-0 A-3 A-2)
+  ″ (macro A-u A-2 A-0 A-3 A-3)
+  ‴ (macro A-u A-2 A-0 A-3 A-3)
+
+  ® (macro A-u A-0 A-0 A-a A-e)
+  ™ (macro A-u A-2 A-1 A-2 A-2)
+  § (macro A-u A-0 A-0 A-a A-7)
+  © (macro A-u A-0 A-0 A-a A-9)
+  ° (macro A-u A-0 A-0 A-b A-0)
+  Æ (macro A-u A-0 A-0 A-c A-6)
+  µ (macro A-u A-0 A-0 A-b A-5)
+  𝑓 (macro A-u A-1 A-d A-4 A-5 A-3)
+
+  ;; en and em dashes
+  — (macro A-u A-2 A-0 A-1 A-4)
+  – (macro A-u A-2 A-0 A-1 A-3)
+ )
+)
+
+;; virtual keys for symbols
+(defvirtualkeys
+  v0 0
+  v1 1
+  v2 2
+  v3 3
+  v4 4
+  v5 5
+  v6 6
+  v7 7
+  v8 8
+  v9 9
+  v! S-1
+  v@ S-2
+  v# S-3
+  v$ S-4
+  v% S-5
+  v^ S-6
+  v& S-7
+  v* S-8
+  v| S-\
+  v~ S-`
+  v+ S-=
+  v_ S--
+  v{ S-[
+  v} S-]
+  v: S-;
+  v< S-,
+  v> S-.
+  v? S-/
+  vdq S-'
+)
+
+;; === chords ===
+
+;; chord vars
+(defvar
+  ;; timeouts for chords
+  to-crd-s 30
+  to-crd-m 50
+  to-crd-l 75
+)
+;; chord definitions
+(defchordsv2
+  ;; left hand chords
+  (d f) tab $to-crd-s all-released ()
+  (s d) S-9 $to-crd-s all-released ()
+  (s f) [ $to-crd-m all-released ()
+  (f g) @{ $to-crd-s all-released ()
+  (a f) @! $to-crd-s all-released ()
+  (z x) @@ $to-crd-m all-released ()
+  (c x) ` $to-crd-m all-released ()
+  (c v) @~ $to-crd-m all-released ()
+
+  ;; right hand chords
+  (j k) esc $to-crd-s all-released ()
+  (k l) S-0 $to-crd-s all-released ()
+  (j l) ] $to-crd-m all-released ()
+  (h j) @} $to-crd-s all-released ()
+  (k ;) @:: $to-crd-s all-released ()
+  (j ;) S-' $to-crd-m all-released ()
+  (m n) @_  $to-crd-s all-released ()
+  (m ,) -  $to-crd-s all-released ()
+  (, .) @+ $to-crd-m all-released ()
+  (m .) =  $to-crd-m all-released ()
+  (n m ,) @— $to-crd-l all-released ()
+)
+
+;; === dynamic macros ===
+
+(defalias
+  ;; dms  (dynamic-macro-record-stop)
+  dmst (dynamic-macro-record-stop-truncate 3)
+  rdm1 (dynamic-macro-record 1)
+  pdm1 (dynamic-macro-play 1)
+  rdm2 (dynamic-macro-record 2)
+  pdm2 (dynamic-macro-play 2)
+  rdm3 (dynamic-macro-record 3)
+  pdm3 (dynamic-macro-play 3)
+  rdm4 (dynamic-macro-record 4)
+  pdm4 (dynamic-macro-play 4)
+  rdm5 (dynamic-macro-record 5)
+  pdm5 (dynamic-macro-play 5)
+)
+
+;; dynamic macro sequences
+;; prefix for dynamic macro sequences is comma (,)
+(t! seq vk-dyn-macro-rec-stop (, ,) (dynamic-macro-record-stop-truncate 3))
+(t! seq vk-dyn-macro-rec-1 (, 1) (dynamic-macro-record 1))
+(t! seq vk-dyn-macro-play-1 (1) (dynamic-macro-play 1))
+(t! seq vk-dyn-macro-rec-2 (, 2) (dynamic-macro-record 2))
+(t! seq vk-dyn-macro-play-2 (2) (dynamic-macro-play 2))
+(t! seq vk-dyn-macro-rec-3 (, 3) (dynamic-macro-record 3))
+(t! seq vk-dyn-macro-play-3 (3) (dynamic-macro-play 3))
+(t! seq vk-dyn-macro-rec-4 (, 4) (dynamic-macro-record 4))
+(t! seq vk-dyn-macro-play-4 (4) (dynamic-macro-play 4))
+(t! seq vk-dyn-macro-rec-5 (, 5) (dynamic-macro-record 5))
+(t! seq vk-dyn-macro-play-5 (5) (dynamic-macro-play 5))
+
+;; word macros
+(defalias
+  app  (macro a p p l i c a t i o n)
+  bcz  (macro b e c a u s e)
+  bltn (macro b u i l t i n)
+  brek (macro b r e a k)
+  cla  (macro c l a s s)
+  cnf  (macro c o n f i g u r a t i o n)
+  cnt  (macro c o n t i n u e)
+  def  (macro d e f a u l t)
+  dfn  (macro d e f i n i t i o n)
+  env  (macro e n v i r o n m e n t)
+  flt  (macro f l o a t)
+  fore (macro f o r e a c h)
+  fuc  (macro f u n c t i o n)
+  ifel (macro i f e l s e)
+  imp  (macro i m p o r t)
+  inc  (macro i n c l u d e)
+  int  (macro i n t e g e r)
+  mod  (macro m o d u l e)
+  obj  (macro o b j e c t)
+  prt  (macro p r i n t)
+  ques (macro q u e s t i o n)
+  req  (macro r e q u i r e)
+  rtr  (macro r e t u r n)
+  str  (macro s t r i n g)
+  swch (macro s w i t c h)
+  tmpl (macro t e m p l a t e)
+  unde (macro u n d e f i n e d)
+  ver  (macro v e r s i o n)
+  whle (macro w h i l e)
+
+  ;; names and identifiers
+  ansb (macro a n s i b l e)
+  k8s  (macro k u b e r n e t e s)
+  phz  (macro p h a e z e r)
+  gthb (macro g i t h u b)
+  tf   (macro t e r r a f o r m)
+  dock (macro d o c k e r)
+
+  ;; commonly used domain macros
+  dcom (macro . c o m)
+  dnet (macro . n e t)
+  dorg (macro . o r g)
+  gmal (macro @@ g m a i l . c o m)
+  http (macro h t t p s @: / /)
+  lclh (macro l o c a l h o s t)
+  phzi (macro p h a e z e r . i o)
+  plsr (macro p l s r . i o)
+
+  ;; frequent comment flags
+  #FIX (macro S-(f i x ;) spc)
+  #NOT (macro S-(n o t e ;) spc)
+  #TDO (macro S-(t o d o ;) spc)
+)
+
+;; macro sequences
+(t! seq vk-application (a p p) (macro a p p l i c a t i o n))
+(t! seq vk-because (b c) (macro b e c a u s e))
+(t! seq vk-configuration (c o n f) (macro c o n f i g u r a t i o n))
+(t! seq vk-continue (c o n t) (macro c o n t i n u e))
+(t! seq vk-definition (d f i) (macro d e f i n i t i o n))
+(t! seq vk-environment (e n v) (macro e n v i r o n m e n t))
+(t! seq vk-module (m o d) (macro m o d u l e))
+(t! seq vk-question (q u) (macro q u e s t i o n))
+(t! seq vk-version (v e r) (macro v e r s i o n))
+(t! seq vk-github (g h) (macro g i t h u b))
+(t! seq vk-gmail (S-2 g) (macro S-2 g m a i l . c o m))
+(t! seq vk-@plsr (S-2 p l) (macro S-2 p l s r . i o))
+(t! seq vk-kubernetes (k u) (macro k u b e r n e t e s))
+(t! seq vk-localhost (l o c) (macro l o c a l h o s t))
+(t! seq vk-phaezer.io (p h .) (macro p h a e z e r . i o))
+(t! seq vk-plsr.io (p l .) (macro p l s r . i o))
+(t! seq vk-ansible (a s b) (macro a n s i b l e))
+(t! seq vk-ansible.builtin (a b l) (macro a n s i b l e . b u i l t i n))
+(t! seq vk-break (b r) (macro b r e a k))
+(t! seq vk-builtin (b l t) (macro b u i l t i n))
+(t! seq vk-class (c l) (macro c l a s s))
+(t! seq vk-default (d f a) (macro d e f a u l t))
+(t! seq vk-float (f l) (macro f l o a t))
+(t! seq vk-foreach (f o r) (macro f o r e a c h))
+(t! seq vk-function (f u) (macro f u n c t i o n))
+(t! seq vk-https (h t t) (macro h t t p s S-; / /))
+(t! seq vk-import (i m p) (macro i m p o r t))
+(t! seq vk-include (i n c) (macro i n c l u d e))
+(t! seq vk-integer (i n t) (macro i n t e g e r))
+(t! seq vk-object (o b) (macro o b j e c t))
+(t! seq vk-phaezer (p h a) (macro p h a e z e r))
+(t! seq vk-print (p r) (macro p r i n t))
+(t! seq vk-return (r e) (macro r e t u r n))
+(t! seq vk-switch (s w) (macro s w i t c h))
+(t! seq vk-template (t e m) (macro t e m p l a t e))
+(t! seq vk-undefined (u n d) (macro u n d e f i n e d))
+(t! seq vk-while (w h) (macro w h i l e))
+(t! seq vk-#FIX (S-f) (macro S-(f i x ;) spc))
+(t! seq vk-#NOT (S-n) (macro S-(n o t e ;) spc))
+(t! seq vk-#TDO (S-t) (macro S-(t o d o ;) spc))
+

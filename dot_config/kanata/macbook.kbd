@@ -1,5 +1,5 @@
-(include "lib/symbols.kbd")
-(include "lib/words.kbd")
+(include "lib/common.kbd")
+(include "secrets.kbd")
 
 (defcfg
   ;; required for chordsv2
@@ -9,7 +9,6 @@
 
 
 (defsrc
-  esc  f1  f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
   `    1    2    3    4    5    6    7    8    9    0    -    =   bks
   tab  q    w    e    r    t    y    u    i    o    p    [    ]     \
   caps a    s    d    f    g    h    j    k    l    ;    '        ret
@@ -46,6 +45,14 @@
   )
 )
 
+(deftemplate hrm-l (char mod timeout)
+  (t! mod-tap $char (multi $mod (layer-while-held left-hrm-held)) $timeout)
+)
+
+(deftemplate hrm-r (char mod timeout)
+  (t! mod-tap $char (multi $mod (layer-while-held right-hrm-held)) $timeout)
+)
+
 ;; common aliases
 (defalias
   ;; --- multi ---
@@ -63,9 +70,22 @@
   ;; capsword
   cpw (caps-word-toggle 1000)
 
+  ;; thumbs
+  ;; hold space for symbol layer
   spc (tap-hold 175 175 spc @SYM)
   ;; spc with a longer tap-hold
   spcl (tap-hold 300 300 spc @SYM)
+
+  ;; tap rmet for seq leader
+  rmet (tap-hold-release $to-tap-m $to-hld-s sldr rmet)
+)
+
+(defvirtualkeys
+  vk-capsword (caps-word-toggle 1000)
+)
+
+(defseq
+  vk-capsword (lsft)
 )
 
 
@@ -76,14 +96,14 @@
   h (t! mod-tap h @FN $to-hld-l)
 
   ;; home row mods
-  a (t! mod-tap a lctl $to-hld-m)
-  s (t! mod-tap s lalt $to-hld-m)
-  d (t! mod-tap d lmet $to-hld-l)
-  f (t! mod-tap f lsft $to-hld-s)
-  j (t! mod-tap j rsft $to-hld-s)
-  k (t! mod-tap k rmet $to-hld-l)
-  l (t! mod-tap l ralt $to-hld-m)
-  ; (t! mod-tap ; rctl $to-hld-m)
+  a (t! hrm-l a lctl $to-hld-m)
+  s (t! hrm-l s lalt $to-hld-m)
+  d (t! hrm-l d lmet $to-hld-l)
+  f (t! hrm-l f lsft $to-hld-s)
+  j (t! hrm-r j rsft $to-hld-s)
+  k (t! hrm-r k rmet $to-hld-l)
+  l (t! hrm-r l ralt $to-hld-m)
+  ; (t! hrm-r ; rctl $to-hld-m)
 
   ;; hyp / meh
   z (t! mod-tap z @meh $to-hld-l)
@@ -93,68 +113,59 @@
 )
 
 (deflayer (base)
-  esc   f1    f2    f3    f4    f5          f6   f7     f8    f9   f10   f11    f12
   _     _     _     _     _     _           _     _     _     _     _     _     _    del
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
   bks   @a    @s    @d    @f    @g          @h    @j    @k    @l    @;    _          _
   _     @z    @x    _     _     _           _     _     _     @.    @/               _
-        _     _     _                @spc                     _     _     _
+        _     _     _               @spc                     @rmet  _     _
 )
 
 ;; no home row layer, for basic typing
 (deflayer (nohr)
-  _     _     _     _     _     _           _     _     _     _     _     _     _
   _     _     _     _     _     _           _     _     _     _     _     _     _    del
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
   bks   _     _     _     _     _           _     _     _     _     _     _          _
   _     _     _     _     _     _           _     _     _     _     _                _
-        _     _     _                 @spcl                   _     _     _
+        _     _     _             @spcl                   @rmet _     _
 )
 
 (include "lib/autoshift.kbd")
 
 ;; auto-shifting layer
 (deflayer (as)
-  _     _     _     _     _     _           _     _     _     _     _     _     _
   @s`   @s1   @s2   @s3   @s4   @s5         @s6   @s7   @s8   @s9   @s0   @s-   @s=  del
   _     @sq   @sw   @se   @sr   @st         @sy   @su   @si   @so   @sp   @s[   @s]   @s\
   bks   @sa   @ss   @sd   @sf   @sg         @sh   @sj   @sk   @sl   @s;   @s'         _
   _     @sz   @sx   @sc   @sv   @sb         @sn   @sm   @s,   @s.   @s/               _
-        _     _     _                 @spc                    _     _     _
+        _     _     _                 @spc                      @rmet _     _
 )
 
 ;; home row mods and mod-tap keys for symbols layer
 (defalias
   ;; home row mods
-  hr&  (t! mod-tap @&  lctl $to-hld-l)
-  hrPo (t! mod-tap S-9 lalt $to-hld-l)
-  hr[  (t! mod-tap [   lmet $to-hld-l)
-  hr{  (t! mod-tap @{  lsft $to-hld-l)
+  hr&  (t! hrm-l @&  lctl $to-hld-l)
+  hrPo (t! hrm-l S-9 lalt $to-hld-l)
+  hr[  (t! hrm-l [   lmet $to-hld-l)
+  hr{  (t! hrm-l @{  lsft $to-hld-l)
 
-  hr}  (t! mod-tap @}  rsft $to-hld-l)
-  hr]  (t! mod-tap ]   rmet $to-hld-l)
-  hrPc (t! mod-tap S-0 ralt $to-hld-l)
-  hr|  (t! mod-tap @|  rctl $to-hld-l)
+  hr}  (t! hrm-r @}  rsft $to-hld-l)
+  hr]  (t! hrm-r ]   rmet $to-hld-l)
+  hrPc (t! hrm-r S-0 ralt $to-hld-l)
+  hr|  (t! hrm-r @|  rctl $to-hld-l)
 
   ;; layer mods
-  sy` (t! mod-tap `  @FN $to-hld-s)
-  sy~ (t! mod-tap @~ @SYM2 $to-hld-s)
-  sy+ (t! mod-tap @+ @SYM2 $to-hld-s)
-  sy= (t! mod-tap =  @FN $to-hld-s)
 )
 
 ;; symbols layer
 (deflayer (sym)
-  _     🔅    🔆    _     _     _           _     ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
   @meh  f1    f2    f3    f4    f5          f6    f7    f8    f9    f10   f11   f12    XX
   @hyp  @!    @@    @#    @$    @%          @^    @&    @*    @->   @=>   pgup  pgdn   @meh
   @cpw  @hr&  @hrPo @hr[  @hr{  @^          @$    @hr}  @hr]  @hrPc @hr|  `            @hyp
-  _     @MAC  @NUM  @sy   @sy~  \           @_    -     @sy+  @sy=  @MAC                _
-        _     _     _                 _                       _     _     _
+  _     @MAC  @NUM  `     @~    \           @_    -     @+    =     @MAC              _
+        _     @FN   @SYM2              _                       @SYM2     @FN    _
 )
 
 (deflayer (sym2)
-  _     _     _     _     _     _           _     _     _     _     _     _     _
   XX    XX    XX    XX    XX    XX          XX    @〈   @〉   @《   @》  XX     XX     XX
   XX    @~=   @!=   @==   @®   @™           @=>   @«    @»    @‹    @›   @「    @」    XX
   caps  @&&   @§    @°    @𝑓   @<-          @->   @‘    @’    @“    @”   @||           XX
@@ -163,7 +174,6 @@
 )
 
 (deflayer (num)
-  _     _     _     _     _     _          _     _     _     _     _     _     _
   XX    @!    @@    @#    @$    @%         @^    @&    @*    S-9   S-0   @_    =     bks
   XX    XX    XX    XX    XX    S-9        @#    7     8     9     0     @+    /     \
   bks   XX    XX    XX    XX    S-0        @$    4     5     6     @+    =           ret
@@ -171,26 +181,8 @@
         _     _     _                 _                      0     ent   _
 )
 
-(include "secrets.kbd")
-
-(defalias
-  ;; dynamic macros
-  rdm1 (dynamic-macro-record 1)
-  pdm1 (dynamic-macro-play 1)
-  rdm2 (dynamic-macro-record 2)
-  pdm2 (dynamic-macro-play 2)
-  rdm3 (dynamic-macro-record 3)
-  pdm3 (dynamic-macro-play 3)
-  rdm4 (dynamic-macro-record 4)
-  pdm4 (dynamic-macro-play 4)
-  rdm5 (dynamic-macro-record 5)
-  pdm5 (dynamic-macro-play 5)
-)
-
 ;; macros layer with dynamic macro record/play and word macros
-;; TODO: add more word macros
 (deflayer (macros)
-  _     _     _     _     _     _          _     _     _     _     _     _     _
   XX    @sec1 @sec2 @sec3 @sec4 @sec5      @sec6 @sec7 @sec8 @sec9 XX    XX    XX    XX
   `     @rdm1 @rdm2 @rdm3 @rdm4 @rdm5      XX    XX    XX    @#TDO @phz  XX    XX    XX
   XX    @pdm1 @pdm2 @pdm3 @pdm4 @pdm5      @http @fuc  @rtr  XX    XX    XX          @rtr
@@ -206,9 +198,13 @@
   toNUM (layer-switch num)
 )
 
+(t! seq vk-to-NOHR (` 1) (layer-switch nohr))
+(t! seq vk-to-BASE (` 2) (layer-switch base))
+(t! seq vk-to-AS (` 3) (layer-switch as))
+(t! seq vk-to-NUM (` 4) (layer-switch num))
+
 ;; function layer
 (deflayer (fn)
-  _     _       _       _     _       _          _     _    _     _     _     _     _
   XX    XX      XX      XX    XX      XX         XX    XX   XX    XX    XX    XX    XX    XX
   XX    🔇      🔊      ▶⏸    🔆      XX         XX    XX   XX    XX    XX    XX    XX   XX
   XX    ◀◀      🔉      ▶▶    🔅      XX          ◀     ▼    ▲     ▶    esc   XX          XX
@@ -216,40 +212,18 @@
         _     _     _                  _                          _     _      _
 )
 
-;; chords
-(defvar
-  ;; chords
-  to-crd-s 30
-  to-crd-m 50
-  to-crd-l 75
+(deflayer (left-hrm-held)
+  _     _     _     _     _     _           _     _     _     _     _     _     _    _
+  _     _     _     _     _     _           _     _     _     _     _     _     _    _
+  _     lctl  lalt  lmet  lsft  _           _     _     _     _     _     _          _
+  _     _     _     _     _     _           _     _     _     _     _                _
+        _     _     _                 _                       _     _     _
 )
 
-(defchordsv2
-  ;; LEFT HAND
-  ;; home row
-  (d f)   tab  $to-crd-s all-released ()
-  (s d)   S-9  $to-crd-s all-released ()
-  (s d f) @{   $to-crd-m all-released ()
-  (s f)   [    $to-crd-s all-released ()
-  (a f)   @!   $to-crd-s all-released ()
-
-  ;; bottom row
-  (z x) \  $to-crd-m all-released ()
-  (c v) @~ $to-crd-m all-released ()
-  (c x) ` $to-crd-m all-released ()
-
-  ;; RIGHT HAND
-  ;; home row
-  (j k)   esc $to-crd-s all-released ()
-  (k l)   S-0 $to-crd-s all-released ()
-  (j l)   ]   $to-crd-s all-released ()
-  (j k l) @}  $to-crd-m all-released ()
-  (j ;)   S-' $to-crd-m all-released ()
-
-  ;; bottom row
-  (n m ,) @—   $to-crd-l all-released ()
-  (m n)   @_   $to-crd-s all-released ()
-  (m ,)   -    $to-crd-s all-released ()
-  (, .)   @+   $to-crd-m all-released ()
-  (, /)   =    $to-crd-m all-released ()
+(deflayer (right-hrm-held)
+  _     _     _     _     _     _           _     _     _     _     _     _     _    _
+  _     _     _     _     _     _           _     _     _     _     _     _     _    _
+  _     _     _     _     _     _           _     rsft  rmet  ralt  rctl  _          _
+  _     _     _     _     _     _           _     _     _     _     _                _
+        _     _     _                 _                       _     _     _
 )
