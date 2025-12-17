@@ -19,14 +19,14 @@
 (defvar
   ;; --- timings ---
   ;; taps
-  to-tap-s 40
-  to-tap-m 75
+  to-tap-s 50
+  to-tap-m 100
   to-tap-l 150
 
   ;; holds
-  to-hld-s 150
-  to-hld-m 200
-  to-hld-l 300
+  to-hld-s 200
+  to-hld-m 300
+  to-hld-l 400
 
   mod-tap-immediate (
     ` 1 2 3 4 5 6 7 8 9 0 - =
@@ -72,12 +72,13 @@
 
   ;; thumbs
   ;; hold space for symbol layer
-  spc (tap-hold 175 175 spc @SYM)
+  spc (tap-hold $to-hld-s $to-hld-s spc @SYM)
   ;; spc with a longer tap-hold
-  spcl (tap-hold 300 300 spc @SYM)
+  spcl (tap-hold $to-hld-l $to-hld-l spc @SYM)
 
   ;; tap rmet for seq leader
   rmet (tap-hold-release $to-tap-m $to-hld-s sldr rmet)
+  lmet (tap-hold-release $to-tap-m $to-hld-s sldr lmet)
 )
 
 (defvirtualkeys
@@ -117,7 +118,7 @@
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
   bks   @a    @s    @d    @f    @g          @h    @j    @k    @l    @;    _          _
   _     @z    @x    _     _     _           _     _     _     @.    @/               _
-        _     _     _               @spc                     @rmet  _     _
+        _     _     @lmet            @spc                     @rmet  _     _
 )
 
 ;; no home row layer, for basic typing
@@ -126,7 +127,7 @@
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
   bks   _     _     _     _     _           _     _     _     _     _     _          _
   _     _     _     _     _     _           _     _     _     _     _                _
-        _     _     _             @spcl                   @rmet _     _
+        _     _     @lmet           @spcl                   @rmet _     _
 )
 
 (include "lib/autoshift.kbd")
@@ -137,7 +138,7 @@
   _     @sq   @sw   @se   @sr   @st         @sy   @su   @si   @so   @sp   @s[   @s]   @s\
   bks   @sa   @ss   @sd   @sf   @sg         @sh   @sj   @sk   @sl   @s;   @s'         _
   _     @sz   @sx   @sc   @sv   @sb         @sn   @sm   @s,   @s.   @s/               _
-        _     _     _                 @spc                      @rmet _     _
+        _     _     @lmet            @spc                     @rmet _     _
 )
 
 ;; home row mods and mod-tap keys for symbols layer
@@ -159,9 +160,9 @@
 ;; symbols layer
 (deflayer (sym)
   @meh  f1    f2    f3    f4    f5          f6    f7    f8    f9    f10   f11   f12    XX
-  @hyp  @!    @@    @#    @$    @%          @^    @&    @*    @->   @=>   pgup  pgdn   @meh
-  @cpw  @hr&  @hrPo @hr[  @hr{  @^          @$    @hr}  @hr]  @hrPc @hr|  `            @hyp
-  _     @MAC  @NUM  `     @~    \           @_    -     @+    =     @MAC              _
+  @hyp  esc   @@    @#    @$    @%          @^    @&    @*    @->   @=>   pgup  pgdn   @meh
+  @cpw  @hr&  @hrPo @hr[  @hr{  @|          @$    @hr}  @hr]  @hrPc @hr|  `            @hyp
+  @MAC  @NUM  del   `     @~    \           @_    -     @+    =     @!                 @MAC
         _     @FN   @SYM2              _                       @SYM2     @FN    _
 )
 
@@ -205,9 +206,9 @@
 
 ;; function layer
 (deflayer (fn)
-  XX    XX      XX      XX    XX      XX         XX    XX   XX    XX    XX    XX    XX    XX
-  XX    🔇      🔊      ▶⏸    🔆      XX         XX    XX   XX    XX    XX    XX    XX   XX
-  XX    ◀◀      🔉      ▶▶    🔅      XX          ◀     ▼    ▲     ▶    esc   XX          XX
+  XX    @toBASE @toNOHR @toAS @toNUM  XX         XX    XX   XX    XX    XX    XX    XX    XX
+  XX    ◀◀      ▶⏸      ▶▶    XX      XX         XX    XX   XX    XX    XX    XX    XX   XX
+  XX    🔇      🔉      🔊    🔅      🔆          ◀     ▼    ▲     ▶    esc   XX          XX
   _     @toBASE @toNOHR @toAS @toNUM  XX         home  pgdn pgup  end   XX                _
         _     _     _                  _                          _     _      _
 )
