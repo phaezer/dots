@@ -64,7 +64,7 @@
   SYM2 (layer-toggle sym2)
   ;; TYP (layer-toggle typ)
   NUM (layer-toggle num)
-  MAC (layer-toggle macros)
+  ;; MAC (layer-toggle macros)
   FN (layer-toggle fn)
 
   ;; capsword
@@ -72,13 +72,15 @@
 
   ;; thumbs
   ;; hold space for symbol layer
-  spc (tap-hold $to-hld-s $to-hld-s spc @SYM)
+  spc (tap-hold 150 150 spc @SYM)
   ;; spc with a longer tap-hold
   spcl (tap-hold $to-hld-l $to-hld-l spc @SYM)
 
   ;; tap rmet for seq leader
-  rmet (tap-hold-release $to-tap-m $to-hld-s sldr rmet)
-  lmet (tap-hold-release $to-tap-m $to-hld-s sldr lmet)
+  rmet (tap-hold-release $to-tap-m $to-hld-s bks rmet)
+  lmet (tap-hold-release $to-tap-m $to-hld-s ret lmet)
+  rsft (tap-hold-release $to-tap-m $to-hld-s sldr rsft)
+  lsft (tap-hold-release $to-tap-m $to-hld-s sldr rsft)
 )
 
 (defvirtualkeys
@@ -117,7 +119,7 @@
   _     _     _     _     _     _           _     _     _     _     _     _     _    del
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
   bks   @a    @s    @d    @f    @g          @h    @j    @k    @l    @;    _          _
-  _     @z    @x    _     _     _           _     _     _     @.    @/               _
+  @lsft @z    @x    _     _     _           _     _     _     @.    @/               @rsft
         _     _     @lmet            @spc                     @rmet  _     _
 )
 
@@ -126,7 +128,7 @@
   _     _     _     _     _     _           _     _     _     _     _     _     _    del
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
   bks   _     _     _     _     _           _     _     _     _     _     _          _
-  _     _     _     _     _     _           _     _     _     _     _                _
+  @lsft _     _     _     _     _           _     _     _     _     _                @rsft
         _     _     @lmet           @spcl                   @rmet _     _
 )
 
@@ -159,37 +161,37 @@
 
 ;; symbols layer
 (deflayer (sym)
-  @meh  f1    f2    f3    f4    f5          f6    f7    f8    f9    f10   f11   f12    XX
-  @hyp  esc   @@    @#    @$    @%          @^    @&    @*    @->   @=>   pgup  pgdn   @meh
-  @cpw  @hr&  @hrPo @hr[  @hr{  @|          @$    @hr}  @hr]  @hrPc @hr|  `            @hyp
-  @MAC  @NUM  del   `     @~    \           @_    -     @+    =     @!                 @MAC
-        _     @FN   @SYM2              _                       @SYM2     @FN    _
+  esc   f1    f2    f3    f4    f5          f6    f7    f8    f9   f10   f11   f12    XX
+  S-tab @~=   @!=   @#    @%    @^          @$    @*    [     ]    \     @->   @=>    @meh
+  @cpw  @!    @@    @&    @|    @~          -     @+    S-9   S-0  @:    S-'          @hyp
+  _     @<=   @>=   @&&   @||    \          @_    =     @{    @}   @?                  _
+        @NUM  @FN   @SYM2             _                       @SYM2      @FN    _
 )
 
 (deflayer (sym2)
-  XX    XX    XX    XX    XX    XX          XX    @〈   @〉   @《   @》  XX     XX     XX
-  XX    @~=   @!=   @==   @®   @™           @=>   @«    @»    @‹    @›   @「    @」    XX
-  caps  @&&   @§    @°    @𝑓   @<-          @->   @‘    @’    @“    @”   @||           XX
-  XX    XX    XX    @©    XX   XX           @—    @–    @{%   @%}   @::                XX
+  XX    XX    XX    XX    XX    XX          XX    @〈   @〉   @《   @》  @『    @』     XX
+  XX    XX    XX    @µ    @®   @™           @<-   @«    @»    @‹    @›   @「    @」    XX
+  caps  @Æ    @§    @°    @𝑓   @===         @—    @‘    @’    @“    @”   @```          XX
+  XX    XX    XX    @©    XX   XX           @–    @===  @{%   @%}   @::                XX
         _     _     _                  _                      _     _     _
 )
 
 (deflayer (num)
   XX    @!    @@    @#    @$    @%         @^    @&    @*    S-9   S-0   @_    =     bks
   XX    XX    XX    XX    XX    S-9        @#    7     8     9     0     @+    /     \
-  bks   XX    XX    XX    XX    S-0        @$    4     5     6     @+    =           ret
+  bks   lctl  lalt  lmet  lsft  S-0        @$    4     5     6     @+    =           ret
   _     XX    XX    XX    XX    @+         ,     1     2     3     .                 rsft
-        _     _     _                 _                      0     ent   _
+        _     _     @lmet            @spc                          0     ent   _
 )
 
-;; macros layer with dynamic macro record/play and word macros
-(deflayer (macros)
-  XX    @sec1 @sec2 @sec3 @sec4 @sec5      @sec6 @sec7 @sec8 @sec9 XX    XX    XX    XX
-  `     @rdm1 @rdm2 @rdm3 @rdm4 @rdm5      XX    XX    XX    @#TDO @phz  XX    XX    XX
-  XX    @pdm1 @pdm2 @pdm3 @pdm4 @pdm5      @http @fuc  @rtr  XX    XX    XX          @rtr
-  _     @bcz  XX    XX    XX    XX         XX    XX    XX    XX    @ques             XX
-        _     _     XX                 XX                    XX    XX    XX
-)
+;; ;; macros layer with dynamic macro record/play and word macros
+;; (deflayer (macros)
+;;   XX    @sec1 @sec2 @sec3 @sec4 @sec5      @sec6 @sec7 @sec8 @sec9 XX    XX    XX    XX
+;;   `     @rdm1 @rdm2 @rdm3 @rdm4 @rdm5      XX    XX    @int  @obj  @phz  XX    XX    XX
+;;   @dmst @pdm1 @pdm2 @pdm3 @pdm4 @pdm5      @http @fuc  @rtr  @lclh XX    XX          @rtr
+;;   XX    @bcz  XX    XX    XX    XX         XX    XX    XX    XX    @ques             XX
+;;         _     _     XX                 XX                    XX    XX    XX
+;; )
 
 ;; layer switching aliases
 (defalias
