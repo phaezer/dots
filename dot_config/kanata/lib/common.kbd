@@ -230,7 +230,7 @@
 ;; chord definitions
 (defchordsv2
   ;; left hand chords
-  (s d) tab $to-crd-s all-released ()
+  ;; (s d) tab $to-crd-s all-released ()
   (s f) @|  $to-crd-s all-released ()
   (a f) @!  $to-crd-s all-released ()
   (f g) @~  $to-crd-s all-released ()
