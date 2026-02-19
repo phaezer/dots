@@ -1,6 +1,6 @@
 (defvar
  ;; autoshift
-  to-as 175
+  to-as 200
 )
 
 (deftemplate auto-shift (key)

@@ -230,27 +230,25 @@
 ;; chord definitions
 (defchordsv2
   ;; left hand chords
-  (d f) tab $to-crd-s all-released ()
-  (s d) S-9 $to-crd-s all-released ()
-  (s f) [ $to-crd-m all-released ()
-  (f g) @{ $to-crd-s all-released ()
-  (a f) @! $to-crd-s all-released ()
-  (z x) @@ $to-crd-m all-released ()
-  (c x) ` $to-crd-m all-released ()
-  (c v) @~ $to-crd-m all-released ()
+  (s d) tab $to-crd-s all-released ()
+  (s f) @|  $to-crd-s all-released ()
+  (a f) @!  $to-crd-s all-released ()
+  (f g) @~  $to-crd-s all-released ()
+  (d f) @&  $to-crd-s all-released ()
+  (z x) @@  $to-crd-m all-released ()
+  (c x) `   $to-crd-m all-released ()
 
   ;; right hand chords
   (j k) esc $to-crd-s all-released ()
   (k l) S-0 $to-crd-s all-released ()
-  (j l) ] $to-crd-m all-released ()
-  (h j) @} $to-crd-s all-released ()
-  (k ;) @:: $to-crd-s all-released ()
+  (j l) ]   $to-crd-m all-released ()
+  (h j) S-9 $to-crd-s all-released ()
+  (k h) [   $to-crd-s all-released ()
   (j ;) S-' $to-crd-m all-released ()
   (m n) @_  $to-crd-s all-released ()
-  (m ,) -  $to-crd-s all-released ()
-  (, .) @+ $to-crd-m all-released ()
-  (m .) =  $to-crd-m all-released ()
-  (n m ,) @— $to-crd-l all-released ()
+  (m ,) =   $to-crd-s all-released ()
+  (, .) @{  $to-crd-s all-released ()
+  (. /) @}  $to-crd-s all-released ()
 )
 
 ;; === dynamic macros ===
@@ -271,17 +269,16 @@
 )
 
 ;; dynamic macro sequences
-;; prefix for dynamic macro sequences is comma (,)
-(t! seq vk-dyn-macro-rec-stop (/ ,) (dynamic-macro-record-stop-truncate 3))
-(t! seq vk-dyn-macro-rec-1 (/ 1) (dynamic-macro-record 1))
+(t! seq vk-dyn-macro-rec-stop (/ .) (dynamic-macro-record-stop-truncate 3))
+(t! seq vk-dyn-macro-rec-1 (/ a) (dynamic-macro-record 1))
 (t! seq vk-dyn-macro-play-1 (1) (dynamic-macro-play 1))
-(t! seq vk-dyn-macro-rec-2 (/ 2) (dynamic-macro-record 2))
+(t! seq vk-dyn-macro-rec-2 (/ s) (dynamic-macro-record 2))
 (t! seq vk-dyn-macro-play-2 (2) (dynamic-macro-play 2))
-(t! seq vk-dyn-macro-rec-3 (/ 3) (dynamic-macro-record 3))
+(t! seq vk-dyn-macro-rec-3 (/ d) (dynamic-macro-record 3))
 (t! seq vk-dyn-macro-play-3 (3) (dynamic-macro-play 3))
-(t! seq vk-dyn-macro-rec-4 (/ 4) (dynamic-macro-record 4))
+(t! seq vk-dyn-macro-rec-4 (/ f) (dynamic-macro-record 4))
 (t! seq vk-dyn-macro-play-4 (4) (dynamic-macro-play 4))
-(t! seq vk-dyn-macro-rec-5 (/ 5) (dynamic-macro-record 5))
+(t! seq vk-dyn-macro-rec-5 (/ g) (dynamic-macro-record 5))
 (t! seq vk-dyn-macro-play-5 (5) (dynamic-macro-play 5))
 
 ;; word macros
@@ -365,6 +362,7 @@
 (t! seq vk-foreach (f e) (macro f o r e a c h))
 (t! seq vk-for_each (f S--) (macro f o r S-- e a c h))
 (t! seq vk-function (f n) (macro f u n c t i o n))
+(t! seq vk-function-parens (f S-9) (macro f u n c t i o n S-9 S-0 left))
 (t! seq vk-format (f m) (macro f o r m a t))
 (t! seq vk-github (g h) (macro g i t h u b))
 (t! seq vk-github.com (. g h) (macro g i t h u b . c o m))

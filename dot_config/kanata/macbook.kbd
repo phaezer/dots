@@ -13,7 +13,7 @@
   tab  q    w    e    r    t    y    u    i    o    p    [    ]     \
   caps a    s    d    f    g    h    j    k    l    ;    '        ret
   lsft z    x    c    v    b    n    m    ,    .    /            rsft
-      lctl lalt lmet            spc           rmet ralt rctl
+      lctl lalt lmet            spc           rmet ralt
 )
 
 (defvar
@@ -62,10 +62,16 @@
   ;; layers
   SYM (layer-toggle sym)
   SYM2 (layer-toggle sym2)
-  ;; TYP (layer-toggle typ)
   NUM (layer-toggle num)
-  ;; MAC (layer-toggle macros)
   FN (layer-toggle fn)
+  SEC (layer-toggle sec)
+
+  toNR (layer-switch nohr)
+  toBS (layer-switch base)
+  toAS (layer-switch as)
+  toNM (layer-switch num)
+  ;; one shot layers
+  oSEC (one-shot-release 1000 @SEC)
 
   ;; capsword
   cpw (caps-word-toggle 1000)
@@ -76,11 +82,11 @@
   ;; spc with a longer tap-hold
   spcl (tap-hold $to-hld-l $to-hld-l spc @SYM)
 
-  ;; tap rmet for seq leader
-  rmet (tap-hold-release $to-tap-m $to-hld-s bks rmet)
-  lmet (tap-hold-release $to-tap-m $to-hld-s ret lmet)
-  rsft (tap-hold-release $to-tap-m $to-hld-s sldr rsft)
-  lsft (tap-hold-release $to-tap-m $to-hld-s sldr rsft)
+  lmet (tap-hold-press $to-tap-m $to-hld-s bks lmet)
+  rmet (tap-hold-press $to-tap-m $to-hld-s ret rmet)
+  rsft (tap-hold-press $to-tap-m $to-hld-s sldr rsft)
+  ralt (tap-hold-press $to-tap-m $to-hld-s rpt-any ralt)
+  lalt (tap-hold-press $to-tap-m $to-hld-s rpt-any lalt)
 )
 
 (defvirtualkeys
@@ -119,8 +125,8 @@
   _     _     _     _     _     _           _     _     _     _     _     _     _    del
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
   bks   @a    @s    @d    @f    @g          @h    @j    @k    @l    @;    _          _
-  @lsft @z    @x    _     _     _           _     _     _     @.    @/               @rsft
-        _     _     @lmet            @spc                     @rmet  _     _
+  _     @z    @x    _     _     _           _     _     _     @.    @/               @rsft
+        _     @lalt @lmet            @spc                     @rmet @lalt
 )
 
 ;; no home row layer, for basic typing
@@ -128,8 +134,8 @@
   _     _     _     _     _     _           _     _     _     _     _     _     _    del
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
   bks   _     _     _     _     _           _     _     _     _     _     _          _
-  @lsft _     _     _     _     _           _     _     _     _     _                @rsft
-        _     _     @lmet           @spcl                   @rmet _     _
+  _     _     _     _     _     _           _     _     _     _     _                @rsft
+        _     @lalt @lmet           @spcl                   @rmet   @ralt
 )
 
 (include "lib/autoshift.kbd")
@@ -139,41 +145,25 @@
   @s`   @s1   @s2   @s3   @s4   @s5         @s6   @s7   @s8   @s9   @s0   @s-   @s=  del
   _     @sq   @sw   @se   @sr   @st         @sy   @su   @si   @so   @sp   @s[   @s]   @s\
   bks   @sa   @ss   @sd   @sf   @sg         @sh   @sj   @sk   @sl   @s;   @s'         _
-  _     @sz   @sx   @sc   @sv   @sb         @sn   @sm   @s,   @s.   @s/               _
-        _     _     @lmet            @spc                     @rmet _     _
-)
-
-;; home row mods and mod-tap keys for symbols layer
-(defalias
-  ;; home row mods
-  hr&  (t! hrm-l @&  lctl $to-hld-l)
-  hrPo (t! hrm-l S-9 lalt $to-hld-l)
-  hr[  (t! hrm-l [   lmet $to-hld-l)
-  hr{  (t! hrm-l @{  lsft $to-hld-l)
-
-  hr}  (t! hrm-r @}  rsft $to-hld-l)
-  hr]  (t! hrm-r ]   rmet $to-hld-l)
-  hrPc (t! hrm-r S-0 ralt $to-hld-l)
-  hr|  (t! hrm-r @|  rctl $to-hld-l)
-
-  ;; layer mods
+  _     @sz   @sx   @sc   @sv   @sb         @sn   @sm   @s,   @s.   @s/               @rsft
+        _     @lalt @lmet            @spcl                    @rmet @ralt
 )
 
 ;; symbols layer
 (deflayer (sym)
   esc   f1    f2    f3    f4    f5          f6    f7    f8    f9   f10   f11   f12    XX
-  S-tab @~=   @!=   @#    @%    @^          @$    @*    [     ]    \     @->   @=>    @meh
+  S-tab @!=   @~=   @#    @%    @^          @$    @*    [     ]    \     @->   @=>    @meh
   @cpw  @!    @@    @&    @|    @~          -     @+    S-9   S-0  @:    S-'          @hyp
   _     @<=   @>=   @&&   @||    \          @_    =     @{    @}   @?                  _
-        @NUM  @FN   @SYM2             _                       @SYM2      @FN    _
+        @NUM  @FN   @SYM2             _                       @SYM2      @FN
 )
 
 (deflayer (sym2)
   XX    XX    XX    XX    XX    XX          XX    @〈   @〉   @《   @》  @『    @』     XX
   XX    XX    XX    @µ    @®   @™           @<-   @«    @»    @‹    @›   @「    @」    XX
-  caps  @Æ    @§    @°    @𝑓   @===         @—    @‘    @’    @“    @”   @```          XX
-  XX    XX    XX    @©    XX   XX           @–    @===  @{%   @%}   @::                XX
-        _     _     _                  _                      _     _     _
+  caps  @Æ    @§    @°    @𝑓   @~=          @—    @‘    @’    @“    @”   @```         XX
+  XX    XX    XX    @©    XX   XX           @–    @==   @{%   @%}   @::               XX
+        _     _     _                  _                      _     _
 )
 
 (deflayer (num)
@@ -181,7 +171,7 @@
   XX    XX    XX    XX    XX    S-9        @#    7     8     9     0     @+    /     \
   bks   lctl  lalt  lmet  lsft  S-0        @$    4     5     6     @+    =           ret
   _     XX    XX    XX    XX    @+         ,     1     2     3     .                 rsft
-        _     _     @lmet            @spc                          0     ent   _
+        _     _     @lmet            @spc              0     ent
 )
 
 ;; ;; macros layer with dynamic macro record/play and word macros
@@ -193,34 +183,45 @@
 ;;         _     _     XX                 XX                    XX    XX    XX
 ;; )
 
-;; layer switching aliases
-(defalias
-  toNOHR (layer-switch nohr)
-  toBASE (layer-switch base)
-  toAS (layer-switch as)
-  toNUM (layer-switch num)
-)
-
 (t! seq vk-to-NOHR (` 1) (layer-switch nohr))
 (t! seq vk-to-BASE (` 2) (layer-switch base))
 (t! seq vk-to-AS (` 3) (layer-switch as))
 (t! seq vk-to-NUM (` 4) (layer-switch num))
 
 ;; function layer
+;; (deflayer (fn)
+;;   XX    @toBS @toNR  @toAS @toNM  XX         XX    XX   XX    XX    XX    XX    XX    XX
+;;   XX    ◀◀      ▶⏸    ▶▶   XX     XX         XX    XX   XX    XX    XX    XX    XX    XX
+;;   XX    🔇      🔉    🔊    🔅     🔆          ◀     ▼    ▲     ▶     XX    XX          XX
+;;   _     @toBS @toNR  @toAS @toNM  XX         home  pgdn pgup  end   XX                _
+;;         _     _       _                  _                          _     _
+;; )
+
+
+;; function layer
 (deflayer (fn)
-  XX    @toBASE @toNOHR @toAS @toNUM  XX         XX    XX   XX    XX    XX    XX    XX    XX
-  XX    ◀◀      ▶⏸      ▶▶    XX      XX         XX    XX   XX    XX    XX    XX    XX   XX
-  XX    🔇      🔉      🔊    🔅      🔆          ◀     ▼    ▲     ▶    esc   XX          XX
-  _     @toBASE @toNOHR @toAS @toNUM  XX         home  pgdn pgup  end   XX                _
-        _     _     _                  _                          _     _      _
+  XX    @toBS @toNR @toAS @toNM  XX         XX    XX   XX    XX    XX    XX    XX    XX
+  XX    home  ▲     end   XX     XX         home  pgdn pgup  end   XX    XX    XX    XX
+  @oSEC ◀     ▼     ▶     XX     XX         ◀     ▼    ▲     ▶     XX    XX          @oSEC
+  XX    ◀◀    ▶⏸    ▶▶    XX     XX         🔅    🔆    🔉    🔊    🔇                 _
+        _     _     _                  _                           _     _
 )
+
+(deflayer (sec)
+  XX    XX    XX   XX     XX    XX         XX    XX    XX   XX     XX    XX    XX    XX
+  XX    XX    XX   XX     XX    XX         XX    XX    XX   XX     XX    XX    XX    XX
+  XX    XX    XX   XX     XX    XX         XX    XX    XX   XX     XX    XX          XX
+  XX    XX    XX   XX     XX    XX         XX    XX    XX   XX     XX                _
+        _     _     _                  _                           _     _
+)
+
 
 (deflayer (left-hrm-held)
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
   _     lctl  lalt  lmet  lsft  _           _     _     _     _     _     _          _
   _     _     _     _     _     _           _     _     _     _     _                _
-        _     _     _                 _                       _     _     _
+        _     _     _                 _                       _     _
 )
 
 (deflayer (right-hrm-held)
@@ -228,5 +229,5 @@
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
   _     _     _     _     _     _           _     rsft  rmet  ralt  rctl  _          _
   _     _     _     _     _     _           _     _     _     _     _                _
-        _     _     _                 _                       _     _     _
+        _     _     _                 _                       _     _
 )

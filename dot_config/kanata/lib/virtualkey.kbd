@@ -1,0 +1,43 @@
+;; virtual keys for symbols
+(defvirtualkeys
+  v0 0
+  v1 1
+  v2 2
+  v3 3
+  v4 4
+  v5 5
+  v6 6
+  v7 7
+  v8 8
+  v9 9
+  v! S-1
+  v@ S-2
+  v# S-3
+  v$ S-4
+  v% S-5
+  v^ S-6
+  v& S-7
+  v* S-8
+  v| S-\
+  v~ S-`
+  v+ S-=
+  v_ S--
+  v{ S-[
+  v} S-]
+  v: S-;
+  v< S-,
+  v> S-.
+  v? S-/
+  vdq S-'
+)
+
+;; templated sequence definition
+(deftemplate seq (vk in out)
+  (defvirtualkeys $vk $out)
+  (defseq $vk $in)
+)
+
+;; template for tapping virtual keys
+(deftemplate tv (key)
+  (on-press tap-vkey $key)
+)
