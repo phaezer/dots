@@ -151,19 +151,19 @@
 
 ;; symbols layer
 (deflayer (sym)
-  esc   f1    f2    f3    f4    f5          f6    f7    f8    f9   f10   f11   f12    XX
-  S-tab @!=   @~=   @#    @%    @^          @$    @*    [     ]    \     @->   @=>    @meh
-  @cpw  @!    @@    @&    @|    @~          -     @+    S-9   S-0  @:    S-'          @hyp
-  _     @<=   @>=   @&&   @||    \          @_    =     @{    @}   @?                  _
+  XX    f1    f2    f3    f4    f5          f6    f7    f8    f9   f10   f11   f12    XX
+  esc   @<=   @>=   @#    @%    @^          @$    @*    [     ]    @::   @->   @=>    XX
+  del   @!    @@    @&    @|    @~          -     @+    S-9   S-0  @:    `            S-ret
+  @cpw  XX    XX    @&&   @||   esc         @_    =     @{    @}   \                  @cpw
         @NUM  @FN   @SYM2             _                       @SYM2      @FN
 )
 
 (deflayer (sym2)
-  XX    XX    XX    XX    XX    XX          XX    @〈   @〉   @《   @》  @『    @』     XX
-  XX    XX    XX    @µ    @®   @™           @<-   @«    @»    @‹    @›   @「    @」    XX
-  caps  @Æ    @§    @°    @𝑓   @~=          @—    @‘    @’    @“    @”   @```         XX
-  XX    XX    XX    @©    XX   XX           @–    @==   @{%   @%}   @::               XX
-        _     _     _                  _                      _     _
+  XX    @『    @』   @「   @」   XX           @«    @»    XX    XX    XX   XX    XX    XX
+  XX    XX    XX    @µ    @®   @™           @‹     @›    @“    @”    XX   @「   @」   XX
+  caps  @Æ    @§    @°    @𝑓   @~=          @〈    @〉   @‘     @’    @:=  @```       XX
+  XX    XX    XX    @©    XX   XX           @《    @》   @{%    @%}   XX              XX
+        _     _     _                  _                      _      _
 )
 
 (deflayer (num)
@@ -208,10 +208,10 @@
 )
 
 (deflayer (sec)
-  XX    XX    XX   XX     XX    XX         XX    XX    XX   XX     XX    XX    XX    XX
-  XX    XX    XX   XX     XX    XX         XX    XX    XX   XX     XX    XX    XX    XX
-  XX    XX    XX   XX     XX    XX         XX    XX    XX   XX     XX    XX          XX
-  XX    XX    XX   XX     XX    XX         XX    XX    XX   XX     XX                _
+  XX    @sc_1 @sc_2 @sc_3 @sc_4 @sc_5      @sc_6 @sc_7 @sc_8 @sc_9 @sc_0 XX    XX    XX
+  XX    @sc_q @sc_w @sc_e @sc_r @sc_t      @sc_y @sc_u @sc_i @sc_o @sc_p XX    XX    XX
+  XX    @sc_a @sc_s @sc_d @sc_f @sc_g      @sc_h @sc_j @sc_k @sc_l @sc_; XX          XX
+  XX    @sc_z @sc_x @sc_c @sc_v @sc_b      @sc_n @sc_m @sc_, @sc_. @sc_/              _
         _     _     _                  _                           _     _
 )
 

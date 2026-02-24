@@ -1,0 +1,9 @@
+# secret files
+secrets.kbd
+# macOS
+.DS_Store
+# Windows
+Thumbs.db
+# Linux
+*~
+.vscode
