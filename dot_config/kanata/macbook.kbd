@@ -152,10 +152,10 @@
 ;; symbols layer
 (deflayer (sym)
   XX    f1    f2    f3    f4    f5          f6    f7    f8    f9   f10   f11   f12    XX
-  esc   @<=   @>=   @#    @%    @^          @$    @*    [     ]    @::   @->   @=>    XX
-  del   @!    @@    @&    @|    @~          -     @+    S-9   S-0  @:    `            S-ret
+  XX    XX    @#    @$    @%    @^          @$    @*    [     ]    @::   @->   @=>    XX
+  del   @!    @@    @&    @|    @~          -     @+    S-9   S-0  @:    `            @hyp
   @cpw  XX    XX    @&&   @||   esc         @_    =     @{    @}   \                  @cpw
-        @NUM  @FN   @SYM2             _                       @SYM2      @FN
+        @hyp  @FN   @SYM2             _                       @SYM2      @FN
 )
 
 (deflayer (sym2)
