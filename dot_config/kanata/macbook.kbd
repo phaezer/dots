@@ -61,7 +61,6 @@
 
   ;; layers
   SYM (layer-toggle sym)
-  SYM2 (layer-toggle sym2)
   NUM (layer-toggle num)
   FN (layer-toggle fn)
   SEC (layer-toggle sec)
@@ -151,51 +150,25 @@
 
 ;; symbols layer
 (deflayer (sym)
-  XX    f1    f2    f3    f4    f5          f6    f7    f8    f9   f10   f11   f12    XX
-  XX    XX    @#    @$    @%    @^          @$    @*    [     ]    @::   @->   @=>    XX
-  del   @!    @@    @&    @|    @~          -     @+    S-9   S-0  @:    `            @hyp
-  @cpw  XX    XX    @&&   @||   esc         @_    =     @{    @}   \                  @cpw
-        @hyp  @FN   @SYM2             _                       @SYM2      @FN
-)
-
-(deflayer (sym2)
-  XX    @『    @』   @「   @」   XX           @«    @»    XX    XX    XX   XX    XX    XX
-  XX    XX    XX    @µ    @®   @™           @‹     @›    @“    @”    XX   @「   @」   XX
-  caps  @Æ    @§    @°    @𝑓   @~=          @〈    @〉   @‘     @’    @:=  @```       XX
-  XX    XX    XX    @©    XX   XX           @《    @》   @{%    @%}   XX              XX
-        _     _     _                  _                      _      _
+  esc   f1    f2    f3    f4    f5          f6    f7    f8    f9   f10   f11   f12    _
+  S-tab @?    @#    @$    @%    @^          @$    @*    [     ]    @::   @->   @=>    _
+  del   @!    @@    @&    @|    @~          -     @+    S-9   S-0  S-'   `            _
+  @cpw  @!=   @<=   @>=   @==   esc         @_    =     @{    @}   \                  @cpw
+        sldr  @FN   @NUM               _                @FN   sldr
 )
 
 (deflayer (num)
-  XX    @!    @@    @#    @$    @%         @^    @&    @*    S-9   S-0   @_    =     bks
-  XX    XX    XX    XX    XX    S-9        @#    7     8     9     0     @+    /     \
-  bks   lctl  lalt  lmet  lsft  S-0        @$    4     5     6     @+    =           ret
+  XX    XX    XX    XX    XX    XX         @&    @*    @*    S-9   S-0   -     =     bks
+  XX    @!    @#    @$    @%    @^         @$    7     8     9     0     [     ]     \
+  bks   lctl  lalt  lmet  lsft  S-0        -     4     5     6     @+    =           ret
   _     XX    XX    XX    XX    @+         ,     1     2     3     .                 rsft
-        _     _     @lmet            @spc              0     ent
+        _     _     _                @spc              0     ent
 )
-
-;; ;; macros layer with dynamic macro record/play and word macros
-;; (deflayer (macros)
-;;   XX    @sec1 @sec2 @sec3 @sec4 @sec5      @sec6 @sec7 @sec8 @sec9 XX    XX    XX    XX
-;;   `     @rdm1 @rdm2 @rdm3 @rdm4 @rdm5      XX    XX    @int  @obj  @phz  XX    XX    XX
-;;   @dmst @pdm1 @pdm2 @pdm3 @pdm4 @pdm5      @http @fuc  @rtr  @lclh XX    XX          @rtr
-;;   XX    @bcz  XX    XX    XX    XX         XX    XX    XX    XX    @ques             XX
-;;         _     _     XX                 XX                    XX    XX    XX
-;; )
 
 (t! seq vk-to-NOHR (` 1) (layer-switch nohr))
 (t! seq vk-to-BASE (` 2) (layer-switch base))
 (t! seq vk-to-AS (` 3) (layer-switch as))
 (t! seq vk-to-NUM (` 4) (layer-switch num))
-
-;; function layer
-;; (deflayer (fn)
-;;   XX    @toBS @toNR  @toAS @toNM  XX         XX    XX   XX    XX    XX    XX    XX    XX
-;;   XX    ◀◀      ▶⏸    ▶▶   XX     XX         XX    XX   XX    XX    XX    XX    XX    XX
-;;   XX    🔇      🔉    🔊    🔅     🔆          ◀     ▼    ▲     ▶     XX    XX          XX
-;;   _     @toBS @toNR  @toAS @toNM  XX         home  pgdn pgup  end   XX                _
-;;         _     _       _                  _                          _     _
-;; )
 
 
 ;; function layer
