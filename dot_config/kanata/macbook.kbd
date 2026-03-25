@@ -81,11 +81,10 @@
   ;; spc with a longer tap-hold
   spcl (tap-hold $to-hld-l $to-hld-l spc @SYM)
 
-  lmet (tap-hold-press $to-tap-m $to-hld-s bks lmet)
-  rmet (tap-hold-press $to-tap-m $to-hld-s ret rmet)
-  rsft (tap-hold-press $to-tap-m $to-hld-s sldr rsft)
-  ralt (tap-hold-press $to-tap-m $to-hld-s rpt-any ralt)
-  lalt (tap-hold-press $to-tap-m $to-hld-s rpt-any lalt)
+  lmet (tap-hold $to-hld-s $to-hld-s bks lmet)
+  rmet (tap-hold $to-hld-s $to-hld-s ret rmet)
+  ralt (tap-hold-press $to-tap-s $to-hld-s sldr ralt)
+  lalt (tap-hold-press $to-tap-s $to-hld-s sldr lalt)
 )
 
 (defvirtualkeys
@@ -124,7 +123,7 @@
   _     _     _     _     _     _           _     _     _     _     _     _     _    del
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
   bks   @a    @s    @d    @f    @g          @h    @j    @k    @l    @;    _          _
-  _     @z    @x    _     _     _           _     _     _     @.    @/               @rsft
+  _     @z    @x    _     _     _           _     _     _     @.    @/               _
         _     @lalt @lmet            @spc                     @rmet @lalt
 )
 
@@ -133,7 +132,7 @@
   _     _     _     _     _     _           _     _     _     _     _     _     _    del
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
   bks   _     _     _     _     _           _     _     _     _     _     _          _
-  _     _     _     _     _     _           _     _     _     _     _                @rsft
+  _     _     _     _     _     _           _     _     _     _     _                _
         _     @lalt @lmet           @spcl                   @rmet   @ralt
 )
 
@@ -144,17 +143,30 @@
   @s`   @s1   @s2   @s3   @s4   @s5         @s6   @s7   @s8   @s9   @s0   @s-   @s=  del
   _     @sq   @sw   @se   @sr   @st         @sy   @su   @si   @so   @sp   @s[   @s]   @s\
   bks   @sa   @ss   @sd   @sf   @sg         @sh   @sj   @sk   @sl   @s;   @s'         _
-  _     @sz   @sx   @sc   @sv   @sb         @sn   @sm   @s,   @s.   @s/               @rsft
+  _     @sz   @sx   @sc   @sv   @sb         @sn   @sm   @s,   @s.   @s/               _
         _     @lalt @lmet            @spcl                    @rmet @ralt
+)
+
+;; symbols layer homerow mods
+(defalias
+  ;; home row mods
+  h!(t! hrm-l @! lctl $to-hld-m)
+  h@ (t! hrm-l @@ lalt $to-hld-m)
+  h& (t! hrm-l @& lmet $to-hld-l)
+  h| (t! hrm-l @| lsft $to-hld-s)
+  h= (t! hrm-r = rsft $to-hld-s)
+  hpr (t! hrm-r S-9 rmet $to-hld-l)
+  hrpr (t! hrm-r S-0 ralt $to-hld-m)
+  hqt (t! hrm-r S-' rctl $to-hld-m)
 )
 
 ;; symbols layer
 (deflayer (sym)
-  esc   f1    f2    f3    f4    f5          f6    f7    f8    f9   f10   f11   f12    _
-  S-tab @?    @#    @$    @%    @^          @$    @*    [     ]    @::   @->   @=>    _
-  del   @!    @@    @&    @|    @~          -     @+    S-9   S-0  S-'   `            _
-  @cpw  @!=   @<=   @>=   @==   esc         @_    =     @{    @}   \                  @cpw
-        sldr  @FN   @NUM               _                @FN   sldr
+  XX    f1    f2    f3    f4    f5          f6    f7    f8    f9    f10   f11   f12    XX
+  XX    `     @#    @$    @%    @^          @$    @*    [     ]     @->   XX    XX     XX
+  XX    @h!   @h@   @h&   @h|   @~          -     @h=   @hpr  @hrpr @hqt  `            XX
+  @cpw  XX    XX    del   tab   esc         @_    @+    @{    @}    \                  XX
+        caps  @FN   @NUM               _                @FN   @SEC
 )
 
 (deflayer (num)
@@ -162,7 +174,7 @@
   XX    @!    @#    @$    @%    @^         @$    7     8     9     0     [     ]     \
   bks   lctl  lalt  lmet  lsft  S-0        -     4     5     6     @+    =           ret
   _     XX    XX    XX    XX    @+         ,     1     2     3     .                 rsft
-        _     _     _                @spc              0     ent
+        _     _     _                spc               0     ent
 )
 
 (t! seq vk-to-NOHR (` 1) (layer-switch nohr))

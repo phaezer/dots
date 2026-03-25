@@ -221,24 +221,13 @@
 
 ;; === chords ===
 
-;; chord vars
-(defvar
-  ;; timeouts for chords
-  to-crd-s 30
-  to-crd-m 50
-  to-crd-l 75
-)
 ;; chord definitions
 (defchordsv2
   ;; left hand chords
-  ;; (s d) tab $to-crd-s all-released ()
-  (q w) @!  $to-crd-s all-released ()
+  (d f) tab 20 all-released ()
 
   ;; right hand chords
-  (h j) =  $to-crd-s all-released ()
-  (j ;) S-' $to-crd-m all-released ()
-  (m n) @_  $to-crd-s all-released ()
-  (m ,) -   $to-crd-s all-released ()
+  (j k) esc 20 all-released ()
 )
 
 ;; === dynamic macros ===
@@ -260,15 +249,15 @@
 
 ;; dynamic macro sequences
 (t! seq vk-dyn-macro-rec-stop (/ .) (dynamic-macro-record-stop-truncate 3))
-(t! seq vk-dyn-macro-rec-1 (/ a) (dynamic-macro-record 1))
+(t! seq vk-dyn-macro-rec-1 (/ 1) (dynamic-macro-record 1))
 (t! seq vk-dyn-macro-play-1 (1) (dynamic-macro-play 1))
-(t! seq vk-dyn-macro-rec-2 (/ s) (dynamic-macro-record 2))
+(t! seq vk-dyn-macro-rec-2 (/ 2) (dynamic-macro-record 2))
 (t! seq vk-dyn-macro-play-2 (2) (dynamic-macro-play 2))
-(t! seq vk-dyn-macro-rec-3 (/ d) (dynamic-macro-record 3))
+(t! seq vk-dyn-macro-rec-3 (/ 3) (dynamic-macro-record 3))
 (t! seq vk-dyn-macro-play-3 (3) (dynamic-macro-play 3))
-(t! seq vk-dyn-macro-rec-4 (/ f) (dynamic-macro-record 4))
+(t! seq vk-dyn-macro-rec-4 (/ 4) (dynamic-macro-record 4))
 (t! seq vk-dyn-macro-play-4 (4) (dynamic-macro-play 4))
-(t! seq vk-dyn-macro-rec-5 (/ g) (dynamic-macro-record 5))
+(t! seq vk-dyn-macro-rec-5 (/ 5) (dynamic-macro-record 5))
 (t! seq vk-dyn-macro-play-5 (5) (dynamic-macro-play 5))
 
 ;; word macros
