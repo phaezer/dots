@@ -87,15 +87,6 @@
   lalt (tap-hold-press $to-tap-s $to-hld-s sldr lalt)
 )
 
-(defvirtualkeys
-  vk-capsword (caps-word-toggle 1000)
-)
-
-(defseq
-  vk-capsword (lsft)
-)
-
-
 ;; home row mods and mod-tap keys
 (defalias
   ;; mod-tap keys
