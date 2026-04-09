@@ -77,11 +77,11 @@
 
   ;; thumbs
   ;; hold space for symbol layer
-  spc (tap-hold 150 150 spc @SYM)
+  spc (tap-hold $to-tap-l $to-tap-l spc @SYM)
   ;; spc with a longer tap-hold
   spcl (tap-hold $to-hld-l $to-hld-l spc @SYM)
 
-  lmet (tap-hold $to-hld-s $to-hld-s bks lmet)
+  lmet (tap-hold $to-tap-l $to-tap-l bks lmet)
   rmet (tap-hold $to-hld-s $to-hld-s ret rmet)
   ralt (tap-hold-press $to-tap-s $to-hld-s sldr ralt)
   lalt (tap-hold-press $to-tap-s $to-hld-s sldr lalt)
@@ -114,7 +114,7 @@
   _     _     _     _     _     _           _     _     _     _     _     _     _    del
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
   bks   @a    @s    @d    @f    @g          @h    @j    @k    @l    @;    _          _
-  _     @z    @x    _     _     _           _     _     _     @.    @/               _
+  _     @z    @x    _     _     _           _     _     _     @.    @/               @cpw
         _     @lalt @lmet            @spc                     @rmet @lalt
 )
 
@@ -134,7 +134,7 @@
   @s`   @s1   @s2   @s3   @s4   @s5         @s6   @s7   @s8   @s9   @s0   @s-   @s=  del
   _     @sq   @sw   @se   @sr   @st         @sy   @su   @si   @so   @sp   @s[   @s]   @s\
   bks   @sa   @ss   @sd   @sf   @sg         @sh   @sj   @sk   @sl   @s;   @s'         _
-  _     @sz   @sx   @sc   @sv   @sb         @sn   @sm   @s,   @s.   @s/               _
+  _     @sz   @sx   @sc   @sv   @sb         @sn   @sm   @s,   @s.   @s/               @cpw
         _     @lalt @lmet            @spcl                    @rmet @ralt
 )
 
@@ -153,11 +153,11 @@
 
 ;; symbols layer
 (deflayer (sym)
-  XX    f1    f2    f3    f4    f5          f6    f7    f8    f9    f10   f11   f12    XX
-  XX    `     @#    @$    @%    @^          @$    @*    [     ]     @->   XX    XX     XX
+  @oSEC f1    f2    f3    f4    f5          f6    f7    f8    f9    f10   f11   f12    XX
+  XX    `     @#    @$    @%    @^          @$    @*    [     ]     @->   home  end    XX
   XX    @h!   @h@   @h&   @h|   @~          -     @h=   @hpr  @hrpr @hqt  `            XX
-  @cpw  XX    XX    del   tab   esc         @_    @+    @{    @}    \                  XX
-        caps  @FN   @NUM               _                @FN   @SEC
+  @cpw  @{    @}    [     ]     esc         @_    @+    @{    @}    \                  @cpw
+        @SEC  @FN   @NUM               _                @FN   @SEC
 )
 
 (deflayer (num)
@@ -178,7 +178,7 @@
 (deflayer (fn)
   XX    @toBS @toNR @toAS @toNM  XX         XX    XX   XX    XX    XX    XX    XX    XX
   XX    home  ▲     end   XX     XX         home  pgdn pgup  end   XX    XX    XX    XX
-  @oSEC ◀     ▼     ▶     XX     XX         ◀     ▼    ▲     ▶     XX    XX          @oSEC
+  caps  ◀     ▼     ▶     XX     XX         ◀     ▼    ▲     ▶     XX    XX          XX
   XX    ◀◀    ▶⏸    ▶▶    XX     XX         🔅    🔆    🔉    🔊    🔇                 _
         _     _     _                  _                           _     _
 )

@@ -248,16 +248,16 @@
 )
 
 ;; dynamic macro sequences
-(t! seq vk-dyn-macro-rec-stop (/ .) (dynamic-macro-record-stop-truncate 3))
-(t! seq vk-dyn-macro-rec-1 (/ 1) (dynamic-macro-record 1))
+(t! seq vk-dyn-macro-rec-stop (spc .) (dynamic-macro-record-stop-truncate 3))
+(t! seq vk-dyn-macro-rec-1 (spc 1) (dynamic-macro-record 1))
 (t! seq vk-dyn-macro-play-1 (1) (dynamic-macro-play 1))
-(t! seq vk-dyn-macro-rec-2 (/ 2) (dynamic-macro-record 2))
+(t! seq vk-dyn-macro-rec-2 (spc 2) (dynamic-macro-record 2))
 (t! seq vk-dyn-macro-play-2 (2) (dynamic-macro-play 2))
-(t! seq vk-dyn-macro-rec-3 (/ 3) (dynamic-macro-record 3))
+(t! seq vk-dyn-macro-rec-3 (spc 3) (dynamic-macro-record 3))
 (t! seq vk-dyn-macro-play-3 (3) (dynamic-macro-play 3))
-(t! seq vk-dyn-macro-rec-4 (/ 4) (dynamic-macro-record 4))
+(t! seq vk-dyn-macro-rec-4 (spc 4) (dynamic-macro-record 4))
 (t! seq vk-dyn-macro-play-4 (4) (dynamic-macro-play 4))
-(t! seq vk-dyn-macro-rec-5 (/ 5) (dynamic-macro-record 5))
+(t! seq vk-dyn-macro-rec-5 (spc 5) (dynamic-macro-record 5))
 (t! seq vk-dyn-macro-play-5 (5) (dynamic-macro-play 5))
 
 ;; word macros
