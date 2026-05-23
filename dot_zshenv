@@ -1,0 +1,27 @@
+# all additional paths should be added here
+PATHS=(
+  # custom local binaries
+  "$HOME/.local/bin"
+  # spicetify
+  "$HOME/.spicetify"
+  # go binaries
+  "$HOME/go/bin"
+  # rust binaries
+  "$HOME/.cargo/bin"
+  # windsurf
+  "$HOME/.codeium/windsurf/bin"
+  # zvm
+  "$HOME/.zvm/bin"
+  # opencode
+  "$HOME/.opencode/bin"
+)
+
+export EDITOR='nvim'
+
+# add extra paths
+export PATH=$(
+  IFS=:
+  echo "${PATHS[*]}:$PATH"
+)
+
+source "$HOME/.config/zsh/secrets.zsh"
