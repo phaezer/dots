@@ -4,6 +4,24 @@ preview_command = "eza --all --git --icons --color=always {}"
 
 # === sessions ===
 
+# notes
+[[session]]
+name = "notes " 
+path = "~/obsidian/notes"
+
+[[session]]
+name = "writing " 
+path = "~/obsidian/writing"
+
+[[session]]
+name = "journal " 
+path = "~/obsidian/journal"
+
+# homelab 
+[[session]]
+name = "homelab"
+path = "~/projects/homelab/infra"
+
 # config 
 [[session]]
 name = "neovim "
@@ -43,17 +61,6 @@ name = "plsr zig   "
 path = "~/projects/plsr/zig"
 windows = ["lazygit"]
 
-# personal projects
-[[session]]
-name = "evil  "
-path = "~/projects/phaezer/evil"
-windows = ["lazygit"]
-
-[[session]]
-name = "tinygo "
-path = "~/projects/phaezer/tinygo"
-
-# === windows ===
 [[session]]
 name = "lazygit"
 startup_script = "lazygit"
