@@ -7,8 +7,8 @@
   sequence-timeout 1000
 )
 
-
 (defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
   `    1    2    3    4    5    6    7    8    9    0    -    =   bks
   tab  q    w    e    r    t    y    u    i    o    p    [    ]     \
   caps a    s    d    f    g    h    j    k    l    ;    '        ret
@@ -85,6 +85,9 @@
   rmet (tap-hold $to-hld-s $to-hld-s ret rmet)
   ralt (tap-hold-press $to-tap-s $to-hld-s sldr ralt)
   lalt (tap-hold-press $to-tap-s $to-hld-s sldr lalt)
+
+  rsft (tap-dance 200 (rsft @cpw caps))
+  lsft (tap-dance 200 (lsft @cpw caps))
 )
 
 ;; home row mods and mod-tap keys
@@ -111,15 +114,17 @@
 )
 
 (deflayer (base)
+  esc   🔅    🔆    @toBS @toNR  @toAS       @toNM ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
   _     _     _     _     _     _           _     _     _     _     _     _     _    del
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
   bks   @a    @s    @d    @f    @g          @h    @j    @k    @l    @;    _          _
-  _     @z    @x    _     _     _           _     _     _     @.    @/               @cpw
+  @rsft @z    @x    _     _     _           _     _     _     @.    @/               @rsft
         _     @lalt @lmet            @spc                     @rmet @lalt
 )
 
 ;; no home row layer, for basic typing
 (deflayer (nohr)
+  _     _     _     _     _     _           _     _     _     _     _     _     _
   _     _     _     _     _     _           _     _     _     _     _     _     _    del
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
   bks   _     _     _     _     _           _     _     _     _     _     _          _
@@ -131,10 +136,11 @@
 
 ;; auto-shifting layer
 (deflayer (as)
+  _     _     _     _     _     _           _     _     _     _     _     _     _
   @s`   @s1   @s2   @s3   @s4   @s5         @s6   @s7   @s8   @s9   @s0   @s-   @s=  del
   _     @sq   @sw   @se   @sr   @st         @sy   @su   @si   @so   @sp   @s[   @s]   @s\
   bks   @sa   @ss   @sd   @sf   @sg         @sh   @sj   @sk   @sl   @s;   @s'         _
-  _     @sz   @sx   @sc   @sv   @sb         @sn   @sm   @s,   @s.   @s/               @cpw
+  _     @sz   @sx   @sc   @sv   @sb         @sn   @sm   @s,   @s.   @s/               _
         _     @lalt @lmet            @spcl                    @rmet @ralt
 )
 
@@ -153,6 +159,7 @@
 
 ;; symbols layer
 (deflayer (sym)
+  _     _     _     _     _     _           _     _     _     _     _     _     _
   @oSEC f1    f2    f3    f4    f5          f6    f7    f8    f9    f10   f11   f12    XX
   XX    `     @#    @$    @%    @^          @$    @*    [     ]     @->   home  end    XX
   XX    @h!   @h@   @h&   @h|   @~          -     @h=   @hpr  @hrpr @hqt  `            XX
@@ -160,22 +167,28 @@
         @SEC  @FN   @NUM               _                @FN   @SEC
 )
 
-(deflayer (num)
-  XX    XX    XX    XX    XX    XX         @&    @*    @*    S-9   S-0   -     =     bks
-  XX    @!    @#    @$    @%    @^         @$    7     8     9     0     [     ]     \
-  bks   lctl  lalt  lmet  lsft  S-0        -     4     5     6     @+    =           ret
-  _     XX    XX    XX    XX    @+         ,     1     2     3     .                 rsft
-        _     _     _                spc               0     ent
+(defalias
+  lsb (layer-switch base)
 )
 
-(t! seq vk-to-NOHR (` 1) (layer-switch nohr))
-(t! seq vk-to-BASE (` 2) (layer-switch base))
+(deflayer (num)
+  _     _     _     _     _     _           _     _     _     _     _     _     _
+  @lsb  XX    XX    XX    XX    XX          @&    @*    @*    S-9   S-0   -     =     bks
+  XX    @!    @#    @$    @%    @^          @$    7     8     9     0     [     ]     \
+  bks   lctl  lalt  lmet  lsft  S-0         -     4     5     6     @+    =           ret
+  _     XX    XX    XX    XX    @+          ,     1     2     3     .                 rsft
+        _     _     _                  spc              0     ent
+)
+
+(t! seq vk-to-NOHR (` 1) (layer-switch base))
+(t! seq vk-to-BASE (` 2) (layer-switch nohr))
 (t! seq vk-to-AS (` 3) (layer-switch as))
 (t! seq vk-to-NUM (` 4) (layer-switch num))
 
 
 ;; function layer
 (deflayer (fn)
+  _     _     _     _     _     _           _     _     _     _     _     _     _
   XX    @toBS @toNR @toAS @toNM  XX         XX    XX   XX    XX    XX    XX    XX    XX
   XX    home  ▲     end   XX     XX         home  pgdn pgup  end   XX    XX    XX    XX
   caps  ◀     ▼     ▶     XX     XX         ◀     ▼    ▲     ▶     XX    XX          XX
@@ -184,26 +197,41 @@
 )
 
 (deflayer (sec)
-  XX    @sc_1 @sc_2 @sc_3 @sc_4 @sc_5      @sc_6 @sc_7 @sc_8 @sc_9 @sc_0 XX    XX    XX
-  XX    @sc_q @sc_w @sc_e @sc_r @sc_t      @sc_y @sc_u @sc_i @sc_o @sc_p XX    XX    XX
-  XX    @sc_a @sc_s @sc_d @sc_f @sc_g      @sc_h @sc_j @sc_k @sc_l @sc_; XX          XX
-  XX    @sc_z @sc_x @sc_c @sc_v @sc_b      @sc_n @sc_m @sc_, @sc_. @sc_/              _
-        _     _     _                  _                           _     _
+  _     _     _     _     _     _           _     _     _     _     _     _     _
+  XX    @sc_1 @sc_2 @sc_3 @sc_4 @sc_5       @sc_6 @sc_7 @sc_8 @sc_9 @sc_0 XX    XX    XX
+  XX    @sc_q @sc_w @sc_e @sc_r @sc_t       @sc_y @sc_u @sc_i @sc_o @sc_p XX    XX    XX
+  XX    @sc_a @sc_s @sc_d @sc_f @sc_g       @sc_h @sc_j @sc_k @sc_l @sc_; XX          XX
+  XX    @sc_z @sc_x @sc_c @sc_v @sc_b       @sc_n @sc_m @sc_, @sc_. @sc_/              _
+        _     _     _                  _                            _     _
 )
 
+;; left and right hand mod layers for home row mods
+(defalias
+  lha (tap-hold $to-tap-s $to-hld-s a lctl)
+  lhs (tap-hold $to-tap-s $to-hld-s s lalt)
+  lhd (tap-hold $to-tap-s $to-hld-s d lmet)
+  lhf (tap-hold $to-tap-s $to-hld-s f lsft)
+
+  rhj (tap-hold $to-tap-s $to-hld-s j rsft)
+  rhk (tap-hold $to-tap-s $to-hld-s k rmet)
+  rhl (tap-hold $to-tap-s $to-hld-s l ralt)
+  rh; (tap-hold $to-tap-s $to-hld-s ; rctl)
+)
 
 (deflayer (left-hrm-held)
+  _     _     _     _     _     _           _     _     _     _     _     _     _
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
-  _     lctl  lalt  lmet  lsft  _           _     _     _     _     _     _          _
+  _     @lha   @lhs @lhd @lhf   _           _     _     _     _     _     _          _
   _     _     _     _     _     _           _     _     _     _     _                _
         _     _     _                 _                       _     _
 )
 
 (deflayer (right-hrm-held)
+  _     _     _     _     _     _           _     _     _     _     _     _     _
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
   _     _     _     _     _     _           _     _     _     _     _     _     _    _
-  _     _     _     _     _     _           _     rsft  rmet  ralt  rctl  _          _
+  _     _     _     _     _     _           _     @rhj  @rhk  @rhl  @rh;  _          _
   _     _     _     _     _     _           _     _     _     _     _                _
         _     _     _                 _                       _     _
 )
